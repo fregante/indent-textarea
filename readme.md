@@ -64,4 +64,5 @@ indentTextarea.watch('textarea');
 # Related
 
 - [fit-textarea](https://github.com/bfred-it/fit-textarea) - Automatically expand a `<textarea>` to fit its content, in a few bytes.
+- [delegate-it](https://github.com/bfred-it/delegate-it) - DOM event delegation, in <1KB. Can be used to attach one `indent-textarea` to many elements.
 - [Refined GitHub](https://github.com/sindresorhus/refined-github) - Uses this module.
