@@ -1,14 +1,13 @@
 function indentTextarea(el: HTMLTextAreaElement): void {
-	const selection = String(getSelection());
 	const {selectionStart, selectionEnd, value} = el;
-	const linesCount = selection.match(/^|\n/g)!.length;
+	const linesCount = value.slice(selectionStart, selectionEnd).match(/^|\n/g).length;
 
 	if (linesCount > 1) {
 		// Select full first line to replace everything at once
 		const firstLineStart = value.lastIndexOf('\n', selectionStart) + 1;
 		el.setSelectionRange(firstLineStart, selectionEnd);
 
-		const newSelection = window.getSelection().toString();
+		const newSelection = el.value.slice(firstLineStart, selectionEnd);
 		const indentedText = newSelection.replace(
 			/^|\n/g, // Match all line starts
 			'$&\t'
