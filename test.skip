@@ -1,0 +1,20 @@
+// `jsdom` tests impossible because of
+// https://github.com/jsdom/jsdom/issues/317
+// https: //github.com/jsdom/jsdom/issues/1742
+
+import test from 'ava';
+import {JSDOM} from 'jsdom';
+import indentTextarea from '.';
+
+test.beforeEach(() => {
+	const {window} = new JSDOM('<textarea></textarea>');
+	global.window = window;
+	global.getSelection = window.getSelection;
+	global.document = window.document;
+	global.textarea = document.querySelector('textarea');
+});
+
+test(t => {
+	indentTextarea(global.textarea);
+	t.true();
+});
