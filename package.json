@@ -1,7 +1,7 @@
 {
 	"name": "indent-textarea",
 	"description": "Add editor-like tab-to-indent functionality to <textarea>, in a few bytes",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"repository": "bfred-it/indent-textarea",
 	"license": "MIT",
 	"files": [
