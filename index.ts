@@ -1,6 +1,6 @@
 function indentTextarea(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
-	const linesCount = value.slice(selectionStart, selectionEnd).match(/^|\n/g).length;
+	const linesCount = value.slice(selectionStart, selectionEnd).match(/^|\n/g)!.length;
 
 	if (linesCount > 1) {
 		// Select full first line to replace everything at once
