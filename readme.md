@@ -6,6 +6,10 @@
 
 Also supports the native undo functionality (<kbd>ctrl+z</kbd>, <kbd>cmd+z</kbd>, context menu), as seen in the gif on the side.
 
+This only supports tabbing on the current line but it doesn't preserve it for the next line (e.g. when pressing <kbd>enter</kbd>). If you need a more complete solution, check out [behave.js](https://github.com/jakiestfu/Behave.js) (outdated, no _undo_) or [CodeMirror](https://github.com/codemirror/CodeMirror) (much heavier).
+
+**Note:** the API used (`document.execCommand`) will trigger multiple `input` events when multiple lines are selected, so if you have a listener on the `textarea`, make sure to [debounce](https://github.com/sindresorhus/debounce-fn) it.
+
 ## Install
 
 ```
@@ -56,3 +60,8 @@ The selector is run once, so it's equivalent to the example above.
 ```js
 indentTextarea.watch('textarea');
 ```
+
+# Related
+
+- [fit-textarea](https://github.com/bfred-it/fit-textarea) - Automatically expand a `<textarea>` to fit its content, in a few bytes.
+- [Refined GitHub](https://github.com/sindresorhus/refined-github) - Uses this module.
