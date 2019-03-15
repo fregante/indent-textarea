@@ -4,9 +4,10 @@
 
 > Add editor-like tab-to-indent functionality to `<textarea>`, in a few bytes
 
-Also supports the native undo functionality (<kbd>ctrl+z</kbd>, <kbd>cmd+z</kbd>, context menu), as seen in the gif on the side.
+- Supports the native undo functionality (<kbd>ctrl+z</kbd>, <kbd>cmd+z</kbd>, context menu), as seen in the gif on the side.
+- Supports also Firefox (a lot of solutions online don't because of [bugs](https://bugzilla.mozilla.org/show_bug.cgi?id=1220696) and [deprecations](https://www.chromestatus.com/features/5718803933560832)) but without undo support.
 
-This only supports tabbing on the current line but it doesn't preserve it for the next line (e.g. when pressing <kbd>enter</kbd>). If you need a more complete solution, check out [behave.js](https://github.com/jakiestfu/Behave.js) (outdated, no _undo_) or [CodeMirror](https://github.com/codemirror/CodeMirror) (much heavier).
+This only supports tabbing on the current line but it doesn't preserve it for the next line like a full code editor would (e.g. when pressing <kbd>enter</kbd>). If you need a more complete solution, check out [behave.js](https://github.com/jakiestfu/Behave.js) (outdated, no _undo_) or [CodeMirror](https://github.com/codemirror/CodeMirror) (much heavier).
 
 **Note:** the API used (`document.execCommand`) will trigger multiple `input` events when multiple lines are selected, so if you have a listener on the `textarea`, make sure to [debounce](https://github.com/sindresorhus/debounce-fn) it.
 
