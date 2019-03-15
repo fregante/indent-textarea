@@ -2,6 +2,7 @@ function insertText(textarea: HTMLTextAreaElement, text: string) {
 	// Replace selection with text, with Firefox support
 	// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1220696
 	// Solution: https://www.everythingfrontend.com/posts/insert-text-into-textarea-at-cursor-position.html 🎈
+	textarea.focus(); // The passed `textarea` may not be focused
 	if (!document.execCommand('insertText', false, text)) {
 		textarea.setRangeText(
 			text,
