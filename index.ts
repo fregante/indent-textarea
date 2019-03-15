@@ -1,4 +1,5 @@
 interface EnhancedInputEventInit extends InputEventInit {
+	// Wait for https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33903
 	inputType: string;
 }
 
