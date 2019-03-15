@@ -1,26 +1,39 @@
+function insertText(textarea: HTMLTextAreaElement, text: string) {
+	// Replace selection with text, with Firefox support
+	// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1220696
+	// Solution: https://www.everythingfrontend.com/posts/insert-text-into-textarea-at-cursor-position.html 🎈
+	if (!document.execCommand('insertText', false, text)) {
+		textarea.setRangeText(
+			text,
+			textarea.selectionStart,
+			textarea.selectionEnd,
+			'end' // Without this, the cursor is either at the beginning or `text` remains selected
+		);
+	}
+}
+
 function indentTextarea(el: HTMLTextAreaElement): void {
-	const selection = String(getSelection());
 	const {selectionStart, selectionEnd, value} = el;
-	const linesCount = selection.match(/^|\n/g)!.length;
+	const linesCount = value.slice(selectionStart, selectionEnd).match(/^|\n/g)!.length;
 
 	if (linesCount > 1) {
 		// Select full first line to replace everything at once
 		const firstLineStart = value.lastIndexOf('\n', selectionStart) + 1;
 		el.setSelectionRange(firstLineStart, selectionEnd);
 
-		const newSelection = window.getSelection().toString();
+		const newSelection = el.value.slice(firstLineStart, selectionEnd);
 		const indentedText = newSelection.replace(
 			/^|\n/g, // Match all line starts
 			'$&\t'
 		);
 
 		// Replace newSelection with indentedText
-		document.execCommand('insertText', false, indentedText);
+		insertText(el, indentedText);
 
 		// Restore selection position, including the indentation
 		el.setSelectionRange(selectionStart + 1, selectionEnd + linesCount);
 	} else {
-		document.execCommand('insertText', false, '\t');
+		insertText(el, '\t');
 	}
 }
 
