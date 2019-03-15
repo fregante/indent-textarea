@@ -1,3 +1,7 @@
+interface EnhancedInputEventInit extends InputEventInit {
+	inputType: string;
+}
+
 function insertText(textarea: HTMLTextAreaElement, text: string) {
 	// Replace selection with text, with Firefox support
 	// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1220696
@@ -10,6 +14,10 @@ function insertText(textarea: HTMLTextAreaElement, text: string) {
 			textarea.selectionEnd,
 			'end' // Without this, the cursor is either at the beginning or `text` remains selected
 		);
+		textarea.dispatchEvent(new InputEvent('input', <EnhancedInputEventInit>{
+			data: text,
+			inputType: 'insertText'
+		}));
 	}
 }
 
