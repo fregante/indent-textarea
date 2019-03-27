@@ -1,26 +1,4 @@
-interface EnhancedInputEventInit extends InputEventInit {
-	// Wait for https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33903
-	inputType: string;
-}
-
-function insertText(textarea: HTMLTextAreaElement, text: string) {
-	// Replace selection with text, with Firefox support
-	// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1220696
-	// Solution: https://www.everythingfrontend.com/posts/insert-text-into-textarea-at-cursor-position.html 🎈
-	textarea.focus(); // The passed `textarea` may not be focused
-	if (!document.execCommand('insertText', false, text)) {
-		textarea.setRangeText(
-			text,
-			textarea.selectionStart,
-			textarea.selectionEnd,
-			'end' // Without this, the cursor is either at the beginning or `text` remains selected
-		);
-		textarea.dispatchEvent(new InputEvent('input', <EnhancedInputEventInit>{
-			data: text,
-			inputType: 'insertText'
-		}));
-	}
-}
+import insertText from 'insert-text-textarea';
 
 function indentTextarea(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
