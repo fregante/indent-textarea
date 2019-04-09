@@ -26,7 +26,7 @@
 		"xo": "*"
 	},
 	"scripts": {
-		"test": "tsc && xo && ava",
+		"test": "tsc && ava",
 		"prepare": "tsc",
 		"build": "tsc",
 		"watch": "tsc --watch"
