@@ -18,12 +18,15 @@
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^0.2.1",
 		"@typescript-eslint/eslint-plugin": "^1.4.2",
+		"@types/dom-inputevent": "^1.0.4",
+		"ava": "*",
 		"eslint-config-xo-typescript": "^0.8.0",
+		"puppeteer": "^1.14.0",
 		"typescript": "^3.3.3333",
 		"xo": "*"
 	},
 	"scripts": {
-		"test": "tsc && xo !index.js",
+		"test": "tsc && xo && ava",
 		"prepare": "tsc",
 		"build": "tsc",
 		"watch": "tsc --watch"
@@ -38,7 +41,6 @@
 		]
 	},
 	"dependencies": {
-		"@types/dom-inputevent": "^1.0.4",
 		"insert-text-textarea": "^1.0.1"
 	}
 }
