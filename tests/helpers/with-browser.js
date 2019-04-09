@@ -1,6 +1,6 @@
-import puppeteer from 'puppeteer';
+const puppeteer = require('puppeteer');
 
-export default async function withBrowser(t, run) {
+module.exports = async function withBrowser(t, run) {
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	await page.setContent('<textarea>');
@@ -13,4 +13,4 @@ export default async function withBrowser(t, run) {
 		await page.close();
 		await browser.close();
 	}
-}
+};
