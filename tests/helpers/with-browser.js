@@ -5,11 +5,12 @@ module.exports = async function withBrowser(t, run) {
 	const page = await browser.newPage();
 	await page.setContent('<textarea>');
 
-	t.context.field = await page.$('textarea');
-	console.log(t.context.field)
+	const field = await page.$('textarea');
+	global.document = field.documentOwner;
+	global.InputEvent = global.document.defaultView.InputEvent;
 
 	try {
-		await run(t, page);
+		await run(t, field);
 	} finally {
 		await page.close();
 		await browser.close();
