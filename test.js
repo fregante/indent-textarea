@@ -39,8 +39,8 @@ test('insert tab and replace selection', t => {
 	const textarea = getField('hello', 0, 4);
 	indent(textarea);
 	t.equal(textarea.value, '\to');
-	t.equal(textarea.selectionStart, 2);
-	t.equal(textarea.selectionEnd, 2);
+	t.equal(textarea.selectionStart, 1);
+	t.equal(textarea.selectionEnd, 1);
 	t.end();
 });
 
