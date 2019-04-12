@@ -50,7 +50,7 @@ test('insert tab on every selected line', t => {
 	t.equal(textarea.value, '\ta\n\tb');
 	t.equal(textarea.selectionStart, 1); // Before 'a'
 	t.equal(textarea.selectionEnd, 5); // After 'b'
-	
+
 	indent(textarea);
 	t.equal(textarea.value, '\t\ta\n\t\tb');
 	t.equal(textarea.selectionStart, 2); // Before 'a'
