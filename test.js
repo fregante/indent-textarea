@@ -25,7 +25,6 @@ test('insert tab in empty field', t => {
 	t.end();
 });
 
-
 test('insert tab in filled field', t => {
 	const textarea = getField('hello');
 	t.equal(textarea.value, 'hello');
@@ -49,7 +48,12 @@ test('insert tab on every selected line', t => {
 	const textarea = getField('a\nb', 0, 3);
 	indent(textarea);
 	t.equal(textarea.value, '\ta\n\tb');
-	t.equal(textarea.selectionStart, 2);
-	t.equal(textarea.selectionEnd, 2);
+	t.equal(textarea.selectionStart, 1); // Before 'a'
+	t.equal(textarea.selectionEnd, 5); // After 'b'
+	
+	indent(textarea);
+	t.equal(textarea.value, '\t\ta\n\t\tb');
+	t.equal(textarea.selectionStart, 2); // Before 'a'
+	t.equal(textarea.selectionEnd, 7); // After 'b'
 	t.end();
 });
