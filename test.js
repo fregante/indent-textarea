@@ -30,13 +30,13 @@ test('insert tab in filled field', t => {
 	t.equal(textarea.value, 'hello');
 	indent(textarea);
 	t.equal(textarea.value, 'hello\t');
-	t.equal(textarea.selectionStart, 7);
-	t.equal(textarea.selectionEnd, 7);
+	t.equal(textarea.selectionStart, 6);
+	t.equal(textarea.selectionEnd, 6);
 	t.end();
 });
 
 test('insert tab and replace selection', t => {
-	const textarea = getField('hello', 0, 5);
+	const textarea = getField('hello', 0, 4);
 	indent(textarea);
 	t.equal(textarea.value, '\to');
 	t.equal(textarea.selectionStart, 2);
