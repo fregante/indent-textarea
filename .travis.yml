@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - stable
 addons:
-  firefox: "65.0"
+  firefox: 65.0
   apt:
     packages:
       - xvfb
