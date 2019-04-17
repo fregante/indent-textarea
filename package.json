@@ -33,7 +33,7 @@
 		"test": "run-s --silent prepare test:*",
 		"test:lint": "xo",
 		"test:blink": "browserify test.js | tape-run",
-		"-test:gecko": "browserify test.js | tape-run --browser firefox",
+		"test:gecko": "if [ $CI ]; then browserify test.js | tape-run --browser firefox; fi",
 		"prepare": "tsc",
 		"build": "tsc",
 		"watch": "tsc --watch"
