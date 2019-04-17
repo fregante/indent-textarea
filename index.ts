@@ -38,7 +38,7 @@ type WatchableElements =
 	| HTMLTextAreaElement
 	| HTMLTextAreaElement[]
 	| NodeListOf<HTMLTextAreaElement>;
-function watch(elements: WatchableElements): void {
+function watchAndIndent(elements: WatchableElements): void {
 	if (typeof elements === 'string') {
 		elements = document.querySelectorAll(elements);
 	} else if (elements instanceof HTMLTextAreaElement) {
@@ -50,6 +50,6 @@ function watch(elements: WatchableElements): void {
 	}
 }
 
-indentTextarea.watch = watch;
+indentTextarea.watch = watchAndIndent;
 
 export = indentTextarea;
