@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  - pull_request
+  - push
+
+jobs:
+
+  Tape:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: npm install
+    - run: tsc
+    - run: sudo apt-get install xvfb
+    - run: xvfb-run --auto-servernum npx run-s test:blink test:gecko
+
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: npm install
+    - run: npx xo
