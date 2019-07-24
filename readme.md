@@ -1,8 +1,8 @@
 # indent-textarea [![(size)][badge-gzip]](#no-link) [![(status)][badge-travis]][link-travis]
 
   [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
-  [badge-travis]: https://api.travis-ci.com/bfred-it/indent-textarea.svg
-  [link-travis]: https://travis-ci.com/bfred-it/indent-textarea
+  [badge-travis]: https://api.travis-ci.com/fregante/indent-textarea.svg
+  [link-travis]: https://travis-ci.com/fregante/indent-textarea
 
 <img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">
 
@@ -68,7 +68,7 @@ indentTextarea.watch('textarea');
 
 # Related
 
-- [insert-text-textarea](https://github.com/bfred-it/insert-text-textarea) - Insert text in a textarea (supports Firefox and Undo). Used by this module.
-- [fit-textarea](https://github.com/bfred-it/fit-textarea) - Automatically expand a `<textarea>` to fit its content, in a few bytes.
-- [delegate-it](https://github.com/bfred-it/delegate-it) - DOM event delegation, in <1KB. Can be used to attach one `indent-textarea` to many elements.
+- [insert-text-textarea](https://github.com/fregante/insert-text-textarea) - Insert text in a textarea (supports Firefox and Undo). Used by this module.
+- [fit-textarea](https://github.com/fregante/fit-textarea) - Automatically expand a `<textarea>` to fit its content, in a few bytes.
+- [delegate-it](https://github.com/fregante/delegate-it) - DOM event delegation, in <1KB. Can be used to attach one `indent-textarea` to many elements.
 - [Refined GitHub](https://github.com/sindresorhus/refined-github) - Uses this module.

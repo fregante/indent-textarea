@@ -1,20 +1,43 @@
 {
 	"name": "indent-textarea",
-	"description": "Add editor-like tab-to-indent functionality to <textarea>, in a few bytes",
 	"version": "1.0.4",
-	"repository": "bfred-it/indent-textarea",
+	"description": "Add editor-like tab-to-indent functionality to <textarea>, in a few bytes",
+	"keywords": [
+		"editor",
+		"indent",
+		"indentation",
+		"tab",
+		"text area"
+	],
+	"repository": "fregante/indent-textarea",
 	"license": "MIT",
 	"files": [
 		"index.js",
 		"index.d.ts"
 	],
-	"keywords": [
-		"text area",
-		"tab",
-		"indent",
-		"indentation",
-		"editor"
-	],
+	"scripts": {
+		"build": "tsc",
+		"prepare": "tsc",
+		"test": "run-s --silent prepare test:*",
+		"test:blink": "browserify test.js | tape-run",
+		"test:gecko": "if [ $CI ]; then browserify test.js | tape-run --browser firefox; fi",
+		"test:lint": "xo",
+		"watch": "tsc --watch"
+	},
+	"xo": {
+		"envs": [
+			"browser"
+		],
+		"extensions": [
+			"ts"
+		],
+		"overrides": [
+			{
+				"files": "**/*.ts",
+				"extends": "xo-typescript"
+			}
+		]
+	},
 	"dependencies": {
 		"insert-text-textarea": "^1.0.1"
 	},
@@ -28,28 +51,5 @@
 		"tape-run": "^5.0.0",
 		"typescript": "^3.3.3333",
 		"xo": "*"
-	},
-	"scripts": {
-		"test": "run-s --silent prepare test:*",
-		"test:lint": "xo",
-		"test:blink": "browserify test.js | tape-run",
-		"test:gecko": "if [ $CI ]; then browserify test.js | tape-run --browser firefox; fi",
-		"prepare": "tsc",
-		"build": "tsc",
-		"watch": "tsc --watch"
-	},
-	"xo": {
-		"extensions": [
-			"ts"
-		],
-		"envs": [
-			"browser"
-		],
-		"overrides": [
-			{
-				"files": "**/*.ts",
-				"extends": "xo-typescript"
-			}
-		]
 	}
 }
