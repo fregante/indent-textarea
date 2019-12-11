@@ -1,8 +1,6 @@
-# indent-textarea [![(size)][badge-gzip]](#no-link) [![(status)][badge-travis]][link-travis]
+# indent-textarea [![(size)][badge-gzip]](#no-link)
 
   [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
-  [badge-travis]: https://api.travis-ci.com/fregante/indent-textarea.svg
-  [link-travis]: https://travis-ci.com/fregante/indent-textarea
 
 <img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">
 
