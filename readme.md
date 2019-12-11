@@ -1,6 +1,7 @@
-# indent-textarea [![(size)][badge-gzip]](#no-link)
+# indent-textarea [![][badge-gzip]](#link-npm)
 
   [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
+  [link-npm]: https://www.npmjs.com/package/indent-textarea
 
 <img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">
 
@@ -15,17 +16,16 @@ This only supports tabbing on the current line but it doesn't preserve it for th
 
 ## Install
 
+You can just download the [standalone bundle](https://packd.fregante.now.sh/indent-textarea)
+
+Or use `npm`:
+
 ```
 npm install indent-textarea
 ```
 
-## Setup
-
 ```js
-const indentTextarea = require('indent-textarea');
-```
-
-```js
+// This module is only offered as a ES Module
 import indentTextarea from 'indent-textarea';
 ```
 

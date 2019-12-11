@@ -52,4 +52,4 @@ function watchAndIndent(elements: WatchableElements): void {
 
 indentTextarea.watch = watchAndIndent;
 
-export = indentTextarea;
+export default indentTextarea;
