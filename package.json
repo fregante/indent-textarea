@@ -20,7 +20,7 @@
 		"prepare": "tsc",
 		"test": "run-s --silent prepare test:*",
 		"test:blink": "browserify test.js | tape-run",
-		"test:gecko": "if [ $CI ]; then browserify test.js | tape-run --browser firefox; fi",
+		"test:gecko": "if [ $GITHUB_ACTION ]; then browserify test.js | tape-run --browser firefox; fi",
 		"test:lint": "xo",
 		"watch": "tsc --watch"
 	},
