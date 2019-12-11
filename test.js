@@ -1,5 +1,5 @@
-const test = require('tape');
-const indent = require('.');
+import test from 'tape';
+import indent from '.';
 
 const getField = (value = '', start = undefined, end = undefined) => {
 	const field = document.createElement('textarea');
