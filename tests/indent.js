@@ -1,6 +1,6 @@
 import test from 'tape';
-import indent from '..';
 import {getField, getState} from './_tools';
+import indent from '..';
 
 test('insert tab in empty field', t => {
 	const textarea = getField();
@@ -13,18 +13,18 @@ test('insert tab in empty field', t => {
 });
 
 test('insert tab in filled field (start)', t => {
-	const textarea = getField('hello|');
-	t.equal(getState(textarea), 'hello|');
-	indent(textarea);
-	t.equal(getState(textarea), 'hello\t|');
-	t.end();
-});
-
-test('insert tab in filled field (end)', t => {
 	const textarea = getField('|hello');
 	t.equal(getState(textarea), '|hello');
 	indent(textarea);
 	t.equal(getState(textarea), '\t|hello');
+	t.end();
+});
+
+test('insert tab in filled field (end)', t => {
+	const textarea = getField('hello|');
+	t.equal(getState(textarea), 'hello|');
+	indent(textarea);
+	t.equal(getState(textarea), 'hello\t|');
 	t.end();
 });
 
