@@ -1,82 +1,90 @@
 import test from 'tape';
 import indent from '.';
 
-const getField = (value = '', start = undefined, end = undefined) => {
+const getField = (state = '') => {
 	const field = document.createElement('textarea');
-	field.value = value;
+	const cursor = state.indexOf('|');
+	const selectionStart = state.indexOf('{');
+	const selectionEnd = state.indexOf('}') - 1;
+	field.value = state.replace(/[{|}]/g, '');
+	field.selectionStart = cursor >= 0 ? cursor : selectionStart;
+	field.selectionEnd = cursor >= 0 ? cursor : selectionEnd;
 	document.body.append(field);
-	if (end !== undefined) {
-		field.selectionStart = start;
-		field.selectionEnd = end;
-	}
-
 	return field;
 };
 
-function getSelection(field) {
-	return [
-		field.selectionStart,
-		field.value.slice(field.selectionStart, field.selectionEnd)
-	];
+function getState({value, selectionStart, selectionEnd}) {
+	if (selectionStart === selectionEnd) {
+		return value.slice(0, selectionStart) + '|' + value.slice(selectionStart);
+	}
+
+	return value.slice(0, selectionStart) + '{' + value.slice(selectionStart, selectionEnd) + '}' + value.slice(selectionEnd);
 }
 
 test('insert tab in empty field', t => {
 	const textarea = getField();
-	t.equal(textarea.value, '');
+	t.equal(getState(textarea), '|');
 	indent(textarea);
-	t.equal(textarea.value, '\t');
+	t.equal(getState(textarea), '\t|');
 	indent(textarea);
-	t.equal(textarea.value, '\t\t');
-	t.deepEqual(getSelection(textarea), [2, '']);
+	t.equal(getState(textarea), '\t\t|');
 	t.end();
 });
 
-test('insert tab in filled field', t => {
-	const textarea = getField('hello');
-	t.equal(textarea.value, 'hello');
+test('insert tab in filled field (start)', t => {
+	const textarea = getField('hello|');
+	t.equal(getState(textarea), 'hello|');
 	indent(textarea);
-	t.equal(textarea.value, 'hello\t');
-	t.equal(textarea.selectionStart, 6);
-	t.equal(textarea.selectionEnd, 6);
+	t.equal(getState(textarea), 'hello\t|');
+	t.end();
+});
+
+test('insert tab in filled field (end)', t => {
+	const textarea = getField('|hello');
+	t.equal(getState(textarea), '|hello');
+	indent(textarea);
+	t.equal(getState(textarea), '\t|hello');
 	t.end();
 });
 
 test('insert tab and replace selection', t => {
-	const textarea = getField('hello', 0, 4);
+	const textarea = getField('he{ll}o');
+	t.equal(getState(textarea), 'he{ll}o');
 	indent(textarea);
-	t.equal(textarea.value, '\to');
-	t.equal(textarea.selectionStart, 1);
-	t.equal(textarea.selectionEnd, 1);
+	t.equal(getState(textarea), 'he\t|o');
 	t.end();
 });
 
-test('insert tab on every selected line', t => {
-	const textarea = getField('a\nb\nc', 0, 3);
-
+test('indent every selected line', t => {
+	const textarea = getField('{a\nb\nc}');
+	t.equal(getState(textarea), '{a\nb\nc}');
 	indent(textarea);
-	t.equal(textarea.value, '\ta\n\tb\nc');
-	t.equal(textarea.selectionStart, 1); // Before 'a'
-	t.equal(textarea.selectionEnd, 5); // After 'b'
-
+	t.equal(getState(textarea), '\t{a\n\tb\n\tc}');
 	indent(textarea);
-	t.equal(textarea.value, '\t\ta\n\t\tb\nc');
-	t.equal(textarea.selectionStart, 2); // Before 'a'
-	t.equal(textarea.selectionEnd, 7); // After 'b'
-
+	t.equal(getState(textarea), '\t\t{a\n\t\tb\n\t\tc}');
 	t.end();
 });
 
-test('insert tab on every selected line (counting from the first line break)', t => {
-	const textarea = getField('a\nb\nc', 3, 4); // Only the linebreak between lines 2 and 3 is selected
-
+test('indent every line counting from the linebreak itself', t => {
+	const textarea = getField('a{\nb\nc}');
+	t.equal(getState(textarea), 'a{\nb\nc}');
 	indent(textarea);
-	t.equal(textarea.value, 'a\n\tb\nc');
-	t.deepEqual(getSelection(textarea), [4, '\n']);
+	t.equal(getState(textarea), '\ta{\n\tb\n\tc}');
+	t.end();
+});
 
-	textarea.selectionEnd = 6; // Include `c` in the selection
+test('indent every line stopping before the last linebreak', t => {
+	const textarea = getField('a{\nb\n}c');
+	t.equal(getState(textarea), 'a{\nb\n}c');
 	indent(textarea);
-	t.equal(textarea.value, 'a\n\t\tb\n\tc');
-	t.deepEqual(getSelection(textarea), [5, '\n\tc']);
+	t.equal(getState(textarea), '\ta{\n\tb\n}c');
+	t.end();
+});
 
+test('indent every line (following both the previous rules)', t => {
+	const textarea = getField('a{\n}b\nc');
+	t.equal(getState(textarea), 'a{\n}b\nc');
+	indent(textarea);
+	t.equal(getState(textarea), '\ta{\n}b\nc');
 	t.end();
 });
