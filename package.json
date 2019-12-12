@@ -19,8 +19,8 @@
 		"build": "tsc",
 		"prepare": "tsc",
 		"test": "run-s --silent prepare test:*",
-		"test:blink": "browserify -p esmify test.js | tape-run",
-		"test:gecko": "browserify -p esmify test.js | tape-run --browser firefox",
+		"test:blink": "browserify -p esmify tests/* | tape-run",
+		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
 		"watch": "tsc --watch"
 	},
