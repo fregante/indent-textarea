@@ -1,6 +1,6 @@
 import test from 'tape';
 import {getField, getState} from './_tools';
-import indent from '..';
+import {indent} from '..';
 
 test('insert tab in empty field', t => {
 	const textarea = getField();

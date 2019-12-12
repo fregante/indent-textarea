@@ -1,6 +1,6 @@
 import insertText from 'insert-text-textarea';
 
-function indentTextarea(el: HTMLTextAreaElement): void {
+export function indent(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
 	const selectedText = value.slice(selectionStart, selectionEnd);
 	// The first line should be indented, even if it starts with `\n`
@@ -29,7 +29,7 @@ function indentTextarea(el: HTMLTextAreaElement): void {
 	}
 }
 
-function unindentTextarea(el: HTMLTextAreaElement): void {
+export function unindent(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
 
 	// The first line should always be unindented
@@ -57,7 +57,7 @@ function unindentTextarea(el: HTMLTextAreaElement): void {
 	);
 }
 
-function watchListener(event: KeyboardEvent): void {
+export function eventHandler(event: KeyboardEvent): void {
 	if (event.defaultPrevented) {
 		return;
 	}
@@ -66,9 +66,9 @@ function watchListener(event: KeyboardEvent): void {
 
 	if (event.key === 'Tab') {
 		if (event.shiftKey) {
-			unindentTextarea(textarea);
+			unindent(textarea);
 		} else {
-			indentTextarea(textarea);
+			indent(textarea);
 		}
 
 		event.preventDefault();
@@ -80,7 +80,7 @@ type WatchableElements =
 	| HTMLTextAreaElement
 	| Iterable<HTMLTextAreaElement>;
 
-function watchField(elements: WatchableElements): void {
+export function watch(elements: WatchableElements): void {
 	if (typeof elements === 'string') {
 		elements = document.querySelectorAll(elements);
 	} else if (elements instanceof HTMLTextAreaElement) {
@@ -88,11 +88,6 @@ function watchField(elements: WatchableElements): void {
 	}
 
 	for (const element of elements) {
-		element.addEventListener('keydown', watchListener);
+		element.addEventListener('keydown', eventHandler);
 	}
 }
-
-indentTextarea.watch = watchField;
-indentTextarea.unindent = unindentTextarea;
-
-export default indentTextarea;

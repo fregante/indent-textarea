@@ -26,42 +26,25 @@ npm install indent-textarea
 
 ```js
 // This module is only offered as a ES Module
-import indentTextarea from 'indent-textarea';
+import * as indentation from 'indent-textarea';
 ```
 
 ## Usage
 
-### Once, one element
-
-This will add a <kbd>tab</kbd> where the caret/selection is in the textarea. It's not meant to be used directly.
+You can listen to <kbd>tab</kbd> and <kbd>shift+tab</kbd> to indent and unindent respectively.
 
 ```js
 const textarea = document.querySelector('textarea');
-indentTextarea(textarea);
+indentation.watch(textarea);
 ```
 
-### When the user presses <kbd>tab</kbd>
-
-#### One element
+If you prefer [event delegation](https://github.com/fregante/delegate-it):
 
 ```js
-const textarea = document.querySelector('textarea');
-indentTextarea.watch(textarea);
-```
+import delegate from 'delegate-it';
+import {eventHandler} from 'indent-textarea';
 
-#### Array/NodeList/Iterable of elements
-
-```js
-const textareas = document.querySelectorAll('textarea');
-indentTextarea.watch(textareas);
-```
-
-#### With a selector
-
-The selector is run once, so it's equivalent to the example above.
-
-```js
-indentTextarea.watch('textarea');
+delegate(document.body, 'textarea', 'input', eventHandler);
 ```
 
 # Related
