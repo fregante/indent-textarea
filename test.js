@@ -13,6 +13,13 @@ const getField = (value = '', start = undefined, end = undefined) => {
 	return field;
 };
 
+function getSelection(field) {
+	return [
+		field.selectionStart,
+		field.value.slice(field.selectionStart, field.selectionEnd)
+	];
+}
+
 test('insert tab in empty field', t => {
 	const textarea = getField();
 	t.equal(textarea.value, '');
@@ -20,8 +27,7 @@ test('insert tab in empty field', t => {
 	t.equal(textarea.value, '\t');
 	indent(textarea);
 	t.equal(textarea.value, '\t\t');
-	t.equal(textarea.selectionStart, 2);
-	t.equal(textarea.selectionEnd, 2);
+	t.deepEqual(getSelection(textarea), [2, '']);
 	t.end();
 });
 
@@ -45,15 +51,32 @@ test('insert tab and replace selection', t => {
 });
 
 test('insert tab on every selected line', t => {
-	const textarea = getField('a\nb', 0, 3);
+	const textarea = getField('a\nb\nc', 0, 3);
+
 	indent(textarea);
-	t.equal(textarea.value, '\ta\n\tb');
+	t.equal(textarea.value, '\ta\n\tb\nc');
 	t.equal(textarea.selectionStart, 1); // Before 'a'
 	t.equal(textarea.selectionEnd, 5); // After 'b'
 
 	indent(textarea);
-	t.equal(textarea.value, '\t\ta\n\t\tb');
+	t.equal(textarea.value, '\t\ta\n\t\tb\nc');
 	t.equal(textarea.selectionStart, 2); // Before 'a'
 	t.equal(textarea.selectionEnd, 7); // After 'b'
+
+	t.end();
+});
+
+test('insert tab on every selected line (counting from the first line break)', t => {
+	const textarea = getField('a\nb\nc', 3, 4); // Only the linebreak between lines 2 and 3 is selected
+
+	indent(textarea);
+	t.equal(textarea.value, 'a\n\tb\nc');
+	t.deepEqual(getSelection(textarea), [4, '\n']);
+
+	textarea.selectionEnd = 6; // Include `c` in the selection
+	indent(textarea);
+	t.equal(textarea.value, 'a\n\t\tb\n\tc');
+	t.deepEqual(getSelection(textarea), [5, '\n\tc']);
+
 	t.end();
 });
