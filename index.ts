@@ -2,24 +2,28 @@ import insertText from 'insert-text-textarea';
 
 function indentTextarea(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
-	const linesCount = value.slice(selectionStart, selectionEnd).match(/^|\n/g)!.length;
+	const selectedText = value.slice(selectionStart, selectionEnd);
+	// The first line should be indented, even if it starts with `\n`
+	// The last line should only be indented if includes any character after `\n`
+	const lineBreakCount = /\n/g.exec(selectedText)?.length;
 
-	if (linesCount > 1) {
+	if (lineBreakCount! > 0) {
 		// Select full first line to replace everything at once
-		const firstLineStart = value.lastIndexOf('\n', selectionStart) + 1;
-		el.setSelectionRange(firstLineStart, selectionEnd);
+		const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
+		el.setSelectionRange(firstLineStart, selectionEnd - 1);
 
-		const newSelection = el.value.slice(firstLineStart, selectionEnd);
+		const newSelection = el.value.slice(firstLineStart, selectionEnd - 1);
 		const indentedText = newSelection.replace(
 			/^|\n/g, // Match all line starts
 			'$&\t'
 		);
+		const replacementsCount = indentedText.length - newSelection.length;
 
 		// Replace newSelection with indentedText
 		insertText(el, indentedText);
 
 		// Restore selection position, including the indentation
-		el.setSelectionRange(selectionStart + 1, selectionEnd + linesCount);
+		el.setSelectionRange(selectionStart + 1, selectionEnd + replacementsCount);
 	} else {
 		insertText(el, '\t');
 	}
