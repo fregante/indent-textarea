@@ -10,13 +10,14 @@
 - Supports the native undo functionality (<kbd>ctrl+z</kbd>, <kbd>cmd+z</kbd>, context menu), as seen in the gif on the side.
 - Supports also Firefox (a lot of solutions online don't because of [bugs](https://bugzilla.mozilla.org/show_bug.cgi?id=1220696) and [deprecations](https://www.chromestatus.com/features/5718803933560832)) but without undo support.
 
-This only supports tabbing on the current line but it doesn't preserve it for the next line like a full code editor would (e.g. when pressing <kbd>enter</kbd>). If you need a more complete solution, check out [behave.js](https://github.com/jakiestfu/Behave.js) (outdated, no _undo_) or [CodeMirror](https://github.com/codemirror/CodeMirror) (much heavier).
+This only supports <kbd>tab</kbd> and <kbd>shift+tab</kbd> but it doesn't preserve it on <kbd>enter</kbd> like a full code editor would. If you need a more complete solution, check out [behave.js](https://github.com/jakiestfu/Behave.js) (outdated, no _undo_) or [CodeMirror](https://github.com/codemirror/CodeMirror) (much heavier).
 
 **Note:** the API used (`document.execCommand`) will trigger multiple `input` events when multiple lines are selected, so if you have a listener on the `textarea`, make sure to [debounce](https://github.com/sindresorhus/debounce-fn) it.
 
 ## Install
 
-You can just download the [standalone bundle](https://packd.fregante.now.sh/indent-textarea)
+You can just download the [standalone bundle](https://packd.fregante.now.sh/indent-textarea@latest?name=indentation) (it might take a minute to download)
+
 
 Or use `npm`:
 
@@ -39,6 +40,59 @@ indentation.watch(textarea);
 ```
 
 If you prefer [event delegation](https://github.com/fregante/delegate-it):
+
+```js
+import delegate from 'delegate-it';
+import {eventHandler} from 'indent-textarea';
+
+delegate(document.body, 'textarea', 'input', eventHandler);
+```
+
+If you prefer the raw `indent`/`unindent` methods, they're also available below.
+
+## API
+
+### indentation.watch(textarea)
+
+Adds <kbd>tab</kbd> and <kbd>shift+tab</kbd> event listeners to the provided `textarea`(s).
+
+#### textarea
+
+Type: `HTMLTextAreaElement` `string` `Iterable<HTMLTextAreaElement>`
+
+This can be:
+
+- the `<textarea>` DOM element
+- an array/iterable of DOM elements
+- or a selector that will be used via `document.querySelectorAll` (it will watch all the selected elements)
+
+### indentation.indent(textarea)
+
+Raw method to indent the selected text in the provided `<textarea>` element, once, instantly.
+
+#### textarea
+
+Type: `HTMLTextAreaElement`
+
+### indentation.unindent(textarea)
+
+Raw method to unindent the selected text in the provided `<textarea>` element, once, instantly.
+
+#### textarea
+
+Type: `HTMLTextAreaElement`
+
+### indentation.eventHandler
+
+Type: `(event: KeyboardEvent) => void`
+
+Raw event handler used by `indentation.watch` or to use manually via `addEventListener`
+
+```js
+document.querySelector('textarea').addEventListener('click', eventHandler);
+```
+
+Or with [event delegation](https://github.com/fregante/delegate-it):
 
 ```js
 import delegate from 'delegate-it';
