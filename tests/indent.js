@@ -1,25 +1,6 @@
 import test from 'tape';
-import indent from '.';
-
-const getField = (state = '') => {
-	const field = document.createElement('textarea');
-	const cursor = state.indexOf('|');
-	const selectionStart = state.indexOf('{');
-	const selectionEnd = state.indexOf('}') - 1;
-	field.value = state.replace(/[{|}]/g, '');
-	field.selectionStart = cursor >= 0 ? cursor : selectionStart;
-	field.selectionEnd = cursor >= 0 ? cursor : selectionEnd;
-	document.body.append(field);
-	return field;
-};
-
-function getState({value, selectionStart, selectionEnd}) {
-	if (selectionStart === selectionEnd) {
-		return value.slice(0, selectionStart) + '|' + value.slice(selectionStart);
-	}
-
-	return value.slice(0, selectionStart) + '{' + value.slice(selectionStart, selectionEnd) + '}' + value.slice(selectionEnd);
-}
+import {getField, getState} from './_tools';
+import indent from '..';
 
 test('insert tab in empty field', t => {
 	const textarea = getField();
@@ -32,18 +13,18 @@ test('insert tab in empty field', t => {
 });
 
 test('insert tab in filled field (start)', t => {
-	const textarea = getField('hello|');
-	t.equal(getState(textarea), 'hello|');
-	indent(textarea);
-	t.equal(getState(textarea), 'hello\t|');
-	t.end();
-});
-
-test('insert tab in filled field (end)', t => {
 	const textarea = getField('|hello');
 	t.equal(getState(textarea), '|hello');
 	indent(textarea);
 	t.equal(getState(textarea), '\t|hello');
+	t.end();
+});
+
+test('insert tab in filled field (end)', t => {
+	const textarea = getField('hello|');
+	t.equal(getState(textarea), 'hello|');
+	indent(textarea);
+	t.equal(getState(textarea), 'hello\t|');
 	t.end();
 });
 
