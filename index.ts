@@ -29,20 +29,58 @@ function indentTextarea(el: HTMLTextAreaElement): void {
 	}
 }
 
-function watchListener(event: Event): void {
-	const tsEvent = event as KeyboardEvent; // TODO: find a way around this ugly TypeScript workaround
-	if (tsEvent.key === 'Tab' && !tsEvent.shiftKey) {
-		indentTextarea(tsEvent.target as HTMLTextAreaElement);
-		tsEvent.preventDefault();
+function unindentTextarea(el: HTMLTextAreaElement): void {
+	const {selectionStart, selectionEnd, value} = el;
+
+	// The first line should always be unindented
+	// The last line should only be unindented if includes any character after `\n`
+
+	// Select full first line to replace everything at once
+	const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
+	const minimumSelectionEnd = Math.max(selectionEnd, value.indexOf('\t', selectionStart) + 1);
+	el.setSelectionRange(firstLineStart, minimumSelectionEnd);
+
+	const newSelection = el.value.slice(firstLineStart, minimumSelectionEnd);
+	const indentedText = newSelection.replace(
+		/(^|\n)\t/g,
+		'$1'
+	);
+	const replacementsCount = newSelection.length - indentedText.length;
+
+	// Replace newSelection with indentedText
+	insertText(el, indentedText);
+
+	// Restore selection position, including the indentation
+	el.setSelectionRange(
+		Math.max(0, selectionStart - Number(newSelection.startsWith('\t'))),
+		Math.max(0, selectionEnd - replacementsCount)
+	);
+}
+
+function watchListener(event: KeyboardEvent): void {
+	if (event.defaultPrevented) {
+		return;
+	}
+
+	const textarea = event.target as HTMLTextAreaElement;
+
+	if (event.key === 'Tab') {
+		if (event.shiftKey) {
+			unindentTextarea(textarea);
+		} else {
+			indentTextarea(textarea);
+		}
+
+		event.preventDefault();
 	}
 }
 
 type WatchableElements =
 	| string
 	| HTMLTextAreaElement
-	| HTMLTextAreaElement[]
-	| NodeListOf<HTMLTextAreaElement>;
-function watchAndIndent(elements: WatchableElements): void {
+	| Iterable<HTMLTextAreaElement>;
+
+function watchField(elements: WatchableElements): void {
 	if (typeof elements === 'string') {
 		elements = document.querySelectorAll(elements);
 	} else if (elements instanceof HTMLTextAreaElement) {
@@ -54,6 +92,7 @@ function watchAndIndent(elements: WatchableElements): void {
 	}
 }
 
-indentTextarea.watch = watchAndIndent;
+indentTextarea.watch = watchField;
+indentTextarea.unindent = unindentTextarea;
 
 export default indentTextarea;
