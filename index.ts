@@ -1,4 +1,13 @@
 import insertText from 'insert-text-textarea';
+/*
+
+# Global notes
+
+Indent and unindent affect characters outside the selection, so the selection has to be expanded (`newSelection`) before applying the replacement regex.
+
+The `unindent` selection expansion logic is a bit convoluted and I wish a genius would rewrite it more efficiently.
+
+*/
 
 export function indent(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
@@ -10,7 +19,6 @@ export function indent(el: HTMLTextAreaElement): void {
 	if (lineBreakCount! > 0) {
 		// Select full first line to replace everything at once
 		const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
-		el.setSelectionRange(firstLineStart, selectionEnd - 1);
 
 		const newSelection = el.value.slice(firstLineStart, selectionEnd - 1);
 		const indentedText = newSelection.replace(
@@ -20,6 +28,7 @@ export function indent(el: HTMLTextAreaElement): void {
 		const replacementsCount = indentedText.length - newSelection.length;
 
 		// Replace newSelection with indentedText
+		el.setSelectionRange(firstLineStart, selectionEnd - 1);
 		insertText(el, indentedText);
 
 		// Restore selection position, including the indentation
@@ -29,16 +38,26 @@ export function indent(el: HTMLTextAreaElement): void {
 	}
 }
 
+function findLineEnd(value: string, currentEnd: number): number {
+	// Go to the beginning of the last line
+	const lastLineStart = value.lastIndexOf('\n', currentEnd - 1) + 1;
+
+	// There's nothing to unindent after the last cursor, so leave it as is
+	if (value.charAt(lastLineStart) !== '\t') {
+		return currentEnd;
+	}
+
+	return lastLineStart + 1; // Include the first character, which will be a tab
+}
+
+// The first line should always be unindented
+// The last line should only be unindented if the selection includes any characters after `\n`
 export function unindent(el: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = el;
 
-	// The first line should always be unindented
-	// The last line should only be unindented if includes any character after `\n`
-
-	// Select full first line to replace everything at once
+	// Select the whole first line because it might contain \t
 	const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
-	const minimumSelectionEnd = Math.max(selectionEnd, value.indexOf('\t', selectionStart) + 1);
-	el.setSelectionRange(firstLineStart, minimumSelectionEnd);
+	const minimumSelectionEnd = findLineEnd(value, selectionEnd);
 
 	const newSelection = el.value.slice(firstLineStart, minimumSelectionEnd);
 	const indentedText = newSelection.replace(
@@ -48,12 +67,15 @@ export function unindent(el: HTMLTextAreaElement): void {
 	const replacementsCount = newSelection.length - indentedText.length;
 
 	// Replace newSelection with indentedText
+	el.setSelectionRange(firstLineStart, minimumSelectionEnd);
 	insertText(el, indentedText);
 
 	// Restore selection position, including the indentation
+	const wasTheFirstLineUnindented = value.slice(firstLineStart, selectionStart).includes('\t');
+	const newSelectionStart = selectionStart - Number(wasTheFirstLineUnindented);
 	el.setSelectionRange(
-		Math.max(0, selectionStart - Number(newSelection.startsWith('\t'))),
-		Math.max(0, selectionEnd - replacementsCount)
+		selectionStart - Number(wasTheFirstLineUnindented),
+		Math.max(newSelectionStart, selectionEnd - replacementsCount)
 	);
 }
 

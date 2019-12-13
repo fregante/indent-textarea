@@ -11,10 +11,10 @@ test('undindent empty field (noop)', t => {
 });
 
 test('undindent filled field (start)', t => {
-	const textarea = getField('\thello|');
-	t.equal(getState(textarea), '\thello|');
+	const textarea = getField('\t|hello');
+	t.equal(getState(textarea), '\t|hello');
 	unindent(textarea);
-	t.equal(getState(textarea), 'hello|');
+	t.equal(getState(textarea), '|hello');
 	t.end();
 });
 
@@ -35,10 +35,10 @@ test('undindent filled field (between tabs)', t => {
 });
 
 test('undindent filled field (end)', t => {
-	const textarea = getField('|\thello');
-	t.equal(getState(textarea), '|\thello');
+	const textarea = getField('\thello|');
+	t.equal(getState(textarea), '\thello|');
 	unindent(textarea);
-	t.equal(getState(textarea), '|hello');
+	t.equal(getState(textarea), 'hello|');
 	t.end();
 });
 
@@ -81,5 +81,36 @@ test('undindent every line (following both the previous rules)', t => {
 	t.equal(getState(textarea), '\ta{\n}b\nc');
 	unindent(textarea);
 	t.equal(getState(textarea), 'a{\n}b\nc');
+	t.end();
+});
+
+test('preserve cursor position when deindenting after it', t => {
+	const textarea = getField('\t\n|\t');
+	t.equal(getState(textarea), '\t\n|\t');
+	unindent(textarea);
+	t.equal(getState(textarea), '\t\n|');
+	unindent(textarea);
+	t.end();
+});
+
+test('ignore whitespace on other lines', t => {
+	let textarea = getField('\t\n\t|\t\n\t');
+	t.equal(getState(textarea), '\t\n\t|\t\n\t');
+	unindent(textarea);
+	t.equal(getState(textarea), '\t\n|\t\n\t');
+	unindent(textarea);
+
+	textarea = getField('\t\t\t\t\n\t|\n\t');
+	t.equal(getState(textarea), '\t\t\t\t\n\t|\n\t');
+	unindent(textarea);
+	t.equal(getState(textarea), '\t\t\t\t\n|\n\t');
+	unindent(textarea);
+	t.equal(getState(textarea), '\t\t\t\t\n|\n\t');
+
+	textarea = getField('     \t\n  |\n\t');
+	t.equal(getState(textarea), '     \t\n  |\n\t');
+	unindent(textarea);
+	t.equal(getState(textarea), '     \t\n  |\n\t');
+
 	t.end();
 });
