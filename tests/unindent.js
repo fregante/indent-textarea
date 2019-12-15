@@ -114,3 +114,11 @@ test('ignore whitespace on other lines', t => {
 
 	t.end();
 });
+
+test.skip('ignore trailing whitespace', t => {
+	const textarea = getField('a\t\t|');
+	t.equal(getState(textarea), 'a\t\t|');
+	unindent(textarea);
+	t.equal(getState(textarea), 'a\t\t|');
+	t.end();
+});
