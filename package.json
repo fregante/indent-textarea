@@ -1,6 +1,6 @@
 {
 	"name": "indent-textarea",
-	"version": "1.0.4",
+	"version": "2.0.0",
 	"description": "Add editor-like tab-to-indent functionality to <textarea>, in a few bytes",
 	"keywords": [
 		"editor",
