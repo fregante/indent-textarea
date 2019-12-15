@@ -1,4 +1,4 @@
-# indent-textarea [![][badge-gzip]](#link-npm)
+# indent-textarea [![][badge-gzip]][link-npm]
 
   [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
   [link-npm]: https://www.npmjs.com/package/indent-textarea
