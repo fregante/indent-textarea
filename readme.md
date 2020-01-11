@@ -3,9 +3,11 @@
   [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
   [link-npm]: https://www.npmjs.com/package/indent-textarea
 
-<img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">
+[<img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">](https://fregante.github.io/indent-textarea/)
 
 > Add editor-like tab-to-indent functionality to `<textarea>`, in a few bytes
+
+Try the [demo](https://fregante.github.io/indent-textarea/).
 
 - Supports the native undo functionality (<kbd>ctrl+z</kbd>, <kbd>cmd+z</kbd>, context menu), as seen in the gif on the side.
 - Supports also Firefox (a lot of solutions online don't because of [bugs](https://bugzilla.mozilla.org/show_bug.cgi?id=1220696) and [deprecations](https://www.chromestatus.com/features/5718803933560832)) but without undo support.
