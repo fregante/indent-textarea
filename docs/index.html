@@ -1,13 +1,12 @@
-<html>
+<!doctype html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>`indent-textarea` test page</title>
-  <script src="https://bundle.run/indent-textarea"></script>
+	<link rel="stylesheet" href="https://unpkg.com/@primer/css@14.1.0/dist/base.css">
+	<script src="https://bundle.run/indent-textarea"></script>
 	<style>
 		html {
-			font-family: sans-serif;
 			max-width: 600px;
-			color: #333;
 			margin: auto;
 		}
 		textarea {
@@ -21,13 +20,9 @@
 		}
 	</style>
 </head>
-	<h1>
-		<a href="https://github.com/fregante/indent-textarea"><code>indent-textarea</code></a> testing page
-	</h1>
-
-	<h2><code>&lt;textarea&gt;</code></h2>
-  <p>Press <kbd>tab</kbd> or <kbd>shift+tab</kbd> to test out <code>indent-textarea</code> on real code:</p>
-	<textarea>
+<h1>Testing page for <a href="https://github.com/fregante/indent-textarea">indent-textarea</a></h1>
+<p>Press <kbd>tab</kbd> or <kbd>shift+tab</kbd> to test out <code>indent-textarea</code> on real code:</p>
+<textarea>
 export function eventHandler(event: KeyboardEvent): void {
 	if (event.defaultPrevented) {
 		return;
@@ -46,5 +41,6 @@ export function eventHandler(event: KeyboardEvent): void {
 	}
 }
 </textarea>
-
-</html>
+<script>
+	indentTextarea.watch('textarea');
+</script>
