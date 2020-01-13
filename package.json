@@ -15,6 +15,8 @@
 		"index.js",
 		"index.d.ts"
 	],
+	"type": "module",
+	"module": "index.js",
 	"scripts": {
 		"build": "tsc",
 		"prepare": "tsc",
@@ -53,6 +55,5 @@
 		"tape-run": "^6.0.1",
 		"typescript": "^3.3.3333",
 		"xo": "*"
-	},
-	"type": "module"
+	}
 }
