@@ -19,8 +19,8 @@
 	"module": "index.js",
 	"scripts": {
 		"build": "tsc",
-		"prepare": "tsc",
-		"test": "run-s --silent prepare test:*",
+		"prepare": "tsc --sourceMap false",
+		"test": "npm-run-all --silent build --parallel test:*",
 		"test:blink": "browserify -p esmify tests/* | tape-run",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
