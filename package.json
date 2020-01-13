@@ -21,7 +21,7 @@
 		"build": "tsc",
 		"prepare": "tsc --sourceMap false",
 		"test": "npm-run-all --silent build --parallel test:*",
-		"test:blink": "browserify -p esmify tests/* | tape-run",
+		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
 		"watch": "tsc --watch"
