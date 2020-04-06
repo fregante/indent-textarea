@@ -19,8 +19,8 @@
 	"module": "index.js",
 	"scripts": {
 		"build": "tsc",
-		"prepare": "tsc --sourceMap false",
-		"test": "npm-run-all --silent build --parallel test:*",
+		"prepublishOnly": "tsc --sourceMap false",
+		"test": "run-s build test:*",
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
@@ -29,31 +29,19 @@
 	"xo": {
 		"envs": [
 			"browser"
-		],
-		"extensions": [
-			"ts"
-		],
-		"overrides": [
-			{
-				"files": "**/*.ts",
-				"extends": "xo-typescript"
-			}
 		]
 	},
 	"dependencies": {
 		"insert-text-textarea": "^2.0.0"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.6.0",
-		"@typescript-eslint/eslint-plugin": "^2.11.0",
-		"@typescript-eslint/parser": "^2.11.0",
-		"browserify": "^16.2.2",
-		"eslint-config-xo-typescript": "^0.23.0",
+		"@sindresorhus/tsconfig": "^0.7.0",
+		"browserify": "^16.5.1",
 		"esmify": "^2.1.1",
-		"npm-run-all": "^4.1.3",
-		"tape": "^4.10.1",
-		"tape-run": "^6.0.1",
-		"typescript": "^3.3.3333",
-		"xo": "*"
+		"npm-run-all": "^4.1.5",
+		"tape": "^4.13.2",
+		"tape-run": "^7.0.0",
+		"typescript": "^3.8.3",
+		"xo": "^0.28.3"
 	}
 }

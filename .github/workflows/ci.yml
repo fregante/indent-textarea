@@ -6,18 +6,34 @@ on:
 
 jobs:
 
-  Tape:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: npm install
+    - run: npm run test:lint
+
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: npm install
+    - run: npm run build
+
+  Chrome:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - run: npm install
     - run: tsc
     - run: sudo apt-get install xvfb
-    - run: xvfb-run --auto-servernum npx run-s test:blink test:gecko
+    - run: xvfb-run --auto-servernum npm run test:blink
 
-  Lint:
+  Firefox:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - run: npm install
-    - run: npx xo
+    - run: tsc
+    - run: sudo apt-get install xvfb
+    - run: xvfb-run --auto-servernum npm run test:gecko
