@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: npm install
-    - run: tsc
+    - run: npm run build
     - run: sudo apt-get install xvfb
     - run: xvfb-run --auto-servernum npm run test:blink
 
@@ -34,6 +34,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: npm install
-    - run: tsc
+    - run: npm run build
     - run: sudo apt-get install xvfb
     - run: xvfb-run --auto-servernum npm run test:gecko
