@@ -5,35 +5,34 @@ on:
   - push
 
 jobs:
-
   Lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm install
-    - run: npm run test:lint
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: npm run test:lint
 
   Build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm install
-    - run: npm run build
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: npm run build
 
   Chrome:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm install
-    - run: npm run build
-    - run: sudo apt-get install xvfb
-    - run: xvfb-run --auto-servernum npm run test:blink
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: npm run build
+      - run: sudo apt-get install xvfb
+      - run: xvfb-run --auto-servernum npm run test:blink
 
   Firefox:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm install
-    - run: npm run build
-    - run: sudo apt-get install xvfb
-    - run: xvfb-run --auto-servernum npm run test:gecko
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: npm run build
+      - run: sudo apt-get install xvfb
+      - run: xvfb-run --auto-servernum npm run test:gecko

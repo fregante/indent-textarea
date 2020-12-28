@@ -1,4 +1,5 @@
-import insertText from 'insert-text-textarea';
+import {insert} from 'text-field-edit';
+
 /*
 
 # Global notes
@@ -29,12 +30,12 @@ export function indent(element: HTMLTextAreaElement): void {
 
 		// Replace newSelection with indentedText
 		element.setSelectionRange(firstLineStart, selectionEnd - 1);
-		insertText(element, indentedText);
+		insert(element, indentedText);
 
 		// Restore selection position, including the indentation
 		element.setSelectionRange(selectionStart + 1, selectionEnd + replacementsCount);
 	} else {
-		insertText(element, '\t');
+		insert(element, '\t');
 	}
 }
 
@@ -68,7 +69,7 @@ export function unindent(element: HTMLTextAreaElement): void {
 
 	// Replace newSelection with indentedText
 	element.setSelectionRange(firstLineStart, minimumSelectionEnd);
-	insertText(element, indentedText);
+	insert(element, indentedText);
 
 	// Restore selection position, including the indentation
 	const wasTheFirstLineUnindented = value.slice(firstLineStart, selectionStart).includes('\t');
@@ -86,7 +87,12 @@ export function eventHandler(event: KeyboardEvent): void {
 
 	const textarea = event.target as HTMLTextAreaElement;
 
-	if (event.key === 'Tab' && !event.metaKey && !event.altKey && !event.ctrlKey) {
+	if (
+		event.key === 'Tab' &&
+		!event.metaKey &&
+		!event.altKey &&
+		!event.ctrlKey
+	) {
 		if (event.shiftKey) {
 			unindent(textarea);
 		} else {

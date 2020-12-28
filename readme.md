@@ -1,7 +1,7 @@
 # indent-textarea [![][badge-gzip]][link-npm]
 
-  [badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
-  [link-npm]: https://www.npmjs.com/package/indent-textarea
+[badge-gzip]: https://img.shields.io/bundlephobia/minzip/indent-textarea.svg?label=gzipped
+[link-npm]: https://www.npmjs.com/package/indent-textarea
 
 [<img align="right" src="https://user-images.githubusercontent.com/1402241/33802977-beb8497c-ddbf-11e7-899c-698d89298de4.gif">](https://fregante.github.io/indent-textarea/)
 
@@ -19,7 +19,6 @@ This only supports <kbd>tab</kbd> and <kbd>shift+tab</kbd> but it doesn't preser
 ## Install
 
 You can just download the [standalone bundle](https://packd.fregante.now.sh/indent-textarea@latest?name=indentation) (it might take a minute to download)
-
 
 Or use `npm`:
 
