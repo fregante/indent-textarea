@@ -1,64 +1,66 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://unpkg.com/chota@0.7.2/dist/chota.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>`indent-textarea` npm module testing ground</title>
-<style>
-	* {
-		transition: none !important;
-	}
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://unpkg.com/chota@0.7.2/dist/chota.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>`indent-textarea` npm module testing ground</title>
+	<style>
+		* {
+			transition: none !important;
+		}
 
-	:root {
-		--grid-maxWidth: 500px;
-		--color-primary: #4a8a00;
-		padding-bottom: 3rem;
-		-moz-tab-size: 4;
-		tab-size: 4;
-	}
+		:root {
+			--grid-maxWidth: 500px;
+			--color-primary: #4a8a00;
+			padding-bottom: 3rem;
+			-moz-tab-size: 4;
+			tab-size: 4;
+		}
 
-	code,
-	kbd {
-		color: var(--color-darkGrey);
-	}
+		code,
+		kbd {
+			color: var(--color-darkGrey);
+		}
 
-	h1 {
-		background: #4a8a00;
-		padding: 1em;
-		margin-top: 0;
-		text-align: center;
-	}
+		h1 {
+			background: #4a8a00;
+			padding: 1em;
+			margin-top: 0;
+			text-align: center;
+		}
 
-	h1 a {
-		color: white;
-	}
+		h1 a {
+			color: white;
+		}
 
-	h2 {
-		margin-top: 4rem;
-	}
+		h2 {
+			margin-top: 4rem;
+		}
 
-	.card {
-		margin-bottom: 1em;
-	}
+		.card {
+			margin-bottom: 1em;
+		}
 
-	#status {
-		overflow: hidden;
-	}
+		#status {
+			overflow: hidden;
+		}
 
-	#status pre {
-		margin: 0;
-	}
+		#status pre {
+			margin: 0;
+		}
 
-	#status::before {
-		content: 'Loading';
-		display: block;
-		text-align: center;
-		padding: 0.4em;
-	}
+		#status::before {
+			content: 'Loading';
+			display: block;
+			text-align: center;
+			padding: 0.4em;
+		}
 
-	#status.bd-error::before {
-		content: 'Loading failed';
-	}
-</style>
+		#status.bd-error::before {
+			content: 'Loading failed';
+		}
+	</style>
+</head>
 <body>
 	<h1><a href="https://github.com/fregante/indent-textarea">fregante/indent-textarea</a></h1>
 	<main class="container">
@@ -88,7 +90,8 @@ export function eventHandler(event) {
 	</textarea>
 		<script type="module">
 			const status = document.querySelector('#status')
-			import('https://cdn.pika.dev/indent-textarea@%5E2.0.1')
+			import('./index.js')
+				.catch(() => import('https://unpkg.com/indent-textarea@latest/index.js'))
 				.then(indentation => {
 					indentation.watch('textarea');
 					status.replaceWith(status.firstElementChild);

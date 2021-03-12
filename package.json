@@ -25,6 +25,7 @@
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
+		"start": "snowpack dev",
 		"watch": "tsc --watch"
 	},
 	"xo": {
@@ -40,6 +41,7 @@
 		"browserify": "^17.0.0",
 		"esmify": "^2.1.1",
 		"npm-run-all": "^4.1.5",
+		"snowpack": "^3.0.13",
 		"tape": "^5.2.2",
 		"tape-run": "^8.0.0",
 		"typescript": "^4.2.3",

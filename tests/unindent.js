@@ -2,7 +2,7 @@ import test from 'tape';
 import {getField, getState} from './_tools.js';
 import {unindent} from '../index.js';
 
-test('undindent empty field (noop)', t => {
+test('unindent empty field (noop)', t => {
 	const textarea = getField();
 	t.equal(getState(textarea), '|');
 	unindent(textarea);
@@ -10,7 +10,7 @@ test('undindent empty field (noop)', t => {
 	t.end();
 });
 
-test('undindent filled field (start)', t => {
+test('unindent filled field (start)', t => {
 	const textarea = getField('\t|hello');
 	t.equal(getState(textarea), '\t|hello');
 	unindent(textarea);
@@ -18,7 +18,7 @@ test('undindent filled field (start)', t => {
 	t.end();
 });
 
-test('undindent filled field (middle)', t => {
+test('unindent filled field (middle)', t => {
 	const textarea = getField('\thel|lo');
 	t.equal(getState(textarea), '\thel|lo');
 	unindent(textarea);
@@ -26,7 +26,7 @@ test('undindent filled field (middle)', t => {
 	t.end();
 });
 
-test('undindent filled field (between tabs)', t => {
+test('unindent filled field (between tabs)', t => {
 	const textarea = getField('\t|\thello');
 	t.equal(getState(textarea), '\t|\thello');
 	unindent(textarea);
@@ -34,7 +34,7 @@ test('undindent filled field (between tabs)', t => {
 	t.end();
 });
 
-test('undindent filled field (end)', t => {
+test('unindent filled field (end)', t => {
 	const textarea = getField('\thello|');
 	t.equal(getState(textarea), '\thello|');
 	unindent(textarea);
@@ -42,7 +42,7 @@ test('undindent filled field (end)', t => {
 	t.end();
 });
 
-test('undindent line with selection without replacing it', t => {
+test('unindent line with selection without replacing it', t => {
 	const textarea = getField('\the{ll}o');
 	t.equal(getState(textarea), '\the{ll}o');
 	unindent(textarea);
@@ -50,7 +50,7 @@ test('undindent line with selection without replacing it', t => {
 	t.end();
 });
 
-test('undindent every selected line', t => {
+test('unindent every selected line', t => {
 	const textarea = getField('{\t\ta\nb\n\t\tc}');
 	t.equal(getState(textarea), '{\t\ta\nb\n\t\tc}');
 	unindent(textarea);
@@ -60,7 +60,7 @@ test('undindent every selected line', t => {
 	t.end();
 });
 
-test('undindent every line counting from the linebreak itself', t => {
+test('unindent every line counting from the linebreak itself', t => {
 	const textarea = getField('\ta{\n\tb\n\tc}');
 	t.equal(getState(textarea), '\ta{\n\tb\n\tc}');
 	unindent(textarea);
@@ -68,7 +68,7 @@ test('undindent every line counting from the linebreak itself', t => {
 	t.end();
 });
 
-test('undindent every line stopping before the last linebreak', t => {
+test('unindent every line stopping before the last linebreak', t => {
 	const textarea = getField('\ta{\n\tb\n}c');
 	t.equal(getState(textarea), '\ta{\n\tb\n}c');
 	unindent(textarea);
@@ -76,7 +76,7 @@ test('undindent every line stopping before the last linebreak', t => {
 	t.end();
 });
 
-test('undindent every line (following both the previous rules)', t => {
+test('unindent every line (following both the previous rules)', t => {
 	const textarea = getField('\ta{\n}b\nc');
 	t.equal(getState(textarea), '\ta{\n}b\nc');
 	unindent(textarea);
