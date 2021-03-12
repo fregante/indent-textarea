@@ -11,12 +11,13 @@
 	],
 	"repository": "fregante/indent-textarea",
 	"license": "MIT",
+	"author": "Federico Brigante <me@fregante.com> (https://fregante.com)",
+	"type": "module",
+	"module": "index.js",
 	"files": [
 		"index.js",
 		"index.d.ts"
 	],
-	"type": "module",
-	"module": "index.js",
 	"scripts": {
 		"build": "tsc",
 		"prepack": "tsc --sourceMap false",
@@ -31,17 +32,17 @@
 			"browser"
 		]
 	},
+	"dependencies": {
+		"text-field-edit": "^3.1.0"
+	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.8.0",
+		"@sindresorhus/tsconfig": "^0.9.0",
 		"browserify": "^17.0.0",
 		"esmify": "^2.1.1",
 		"npm-run-all": "^4.1.5",
-		"tape": "^5.0.1",
+		"tape": "^5.2.2",
 		"tape-run": "^8.0.0",
-		"typescript": "^4.1.3",
-		"xo": "^0.36.1"
-	},
-	"dependencies": {
-		"text-field-edit": "^3.1.0"
+		"typescript": "^4.2.3",
+		"xo": "^0.38.2"
 	}
 }

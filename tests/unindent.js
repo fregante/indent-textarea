@@ -1,6 +1,6 @@
 import test from 'tape';
-import {getField, getState} from './_tools';
-import {unindent} from '..';
+import {getField, getState} from './_tools.js';
+import {unindent} from '../index.js';
 
 test('undindent empty field (noop)', t => {
 	const textarea = getField();
