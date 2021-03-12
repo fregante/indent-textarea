@@ -110,7 +110,7 @@ test('ignore whitespace on other lines', t => {
 	textarea = getField('     \t\n  |\n\t');
 	t.equal(getState(textarea), '     \t\n  |\n\t');
 	unindent(textarea);
-	t.equal(getState(textarea), '     \t\n  |\n\t');
+	t.equal(getState(textarea), '     \t\n|\n\t');
 
 	t.end();
 });
@@ -120,5 +120,25 @@ test.skip('ignore trailing whitespace', t => {
 	t.equal(getState(textarea), 'a\t\t|');
 	unindent(textarea);
 	t.equal(getState(textarea), 'a\t\t|');
+	t.end();
+});
+
+test('unindent 2 spaces', t => {
+	const textarea = getField('    hel|lo');
+	t.equal(getState(textarea), '    hel|lo');
+	unindent(textarea);
+	t.equal(getState(textarea), '  hel|lo');
+	unindent(textarea);
+	t.equal(getState(textarea), 'hel|lo');
+	t.end();
+});
+
+test('unindent mixed spaces and tabs', t => {
+	const textarea = getField('  \t  hel|lo');
+	t.equal(getState(textarea), '  \t  hel|lo');
+	unindent(textarea);
+	t.equal(getState(textarea), '\t  hel|lo');
+	unindent(textarea);
+	t.equal(getState(textarea), '  hel|lo');
 	t.end();
 });

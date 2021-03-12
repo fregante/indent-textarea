@@ -62,7 +62,7 @@ export function unindent(element: HTMLTextAreaElement): void {
 
 	const newSelection = element.value.slice(firstLineStart, minimumSelectionEnd);
 	const indentedText = newSelection.replace(
-		/(^|\n)\t/g,
+		/(^|\n)(\t| {1,2})/g,
 		'$1'
 	);
 	const replacementsCount = newSelection.length - indentedText.length;
@@ -72,10 +72,15 @@ export function unindent(element: HTMLTextAreaElement): void {
 	insert(element, indentedText);
 
 	// Restore selection position, including the indentation
-	const wasTheFirstLineUnindented = value.slice(firstLineStart, selectionStart).includes('\t');
-	const newSelectionStart = selectionStart - Number(wasTheFirstLineUnindented);
+	const firstLineIndentation = /\t| {1,2}/.exec(value.slice(firstLineStart, selectionStart));
+
+	const difference = firstLineIndentation ?
+		firstLineIndentation[0]!.length :
+		0;
+
+	const newSelectionStart = selectionStart - difference;
 	element.setSelectionRange(
-		selectionStart - Number(wasTheFirstLineUnindented),
+		selectionStart - difference,
 		Math.max(newSelectionStart, selectionEnd - replacementsCount)
 	);
 }
