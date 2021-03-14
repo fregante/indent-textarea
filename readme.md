@@ -18,7 +18,7 @@ This only supports <kbd>tab</kbd> and <kbd>shift+tab</kbd> but it doesn't preser
 
 ## Install
 
-You can just download the [standalone bundle](https://packd.fregante.now.sh/indent-textarea@latest?name=indentation) (it might take a minute to download)
+You can download the [standalone bundle](https://bundle.fregante.com/?pkg=indent-textarea&global=indentation)
 
 Or use `npm`:
 
