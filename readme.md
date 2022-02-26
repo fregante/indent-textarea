@@ -46,7 +46,7 @@ If you prefer [event delegation](https://github.com/fregante/delegate-it):
 import delegate from 'delegate-it';
 import {eventHandler} from 'indent-textarea';
 
-delegate(document.body, 'textarea', 'input', eventHandler);
+delegate(document.body, 'textarea', 'keydown', eventHandler);
 ```
 
 If you prefer the raw `indent`/`unindent` methods, they're also available below.
@@ -90,7 +90,7 @@ Type: `(event: KeyboardEvent) => void`
 Raw event handler used by `indentation.watch` or to use manually via `addEventListener`
 
 ```js
-document.querySelector('textarea').addEventListener('click', eventHandler);
+document.querySelector('textarea').addEventListener('keydown', eventHandler);
 ```
 
 Or with [event delegation](https://github.com/fregante/delegate-it):
@@ -99,7 +99,7 @@ Or with [event delegation](https://github.com/fregante/delegate-it):
 import delegate from 'delegate-it';
 import {eventHandler} from 'indent-textarea';
 
-delegate(document.body, 'textarea', 'input', eventHandler);
+delegate(document.body, 'textarea', 'keydown', eventHandler);
 ```
 
 # Related
