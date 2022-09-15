@@ -37,7 +37,6 @@ export function indent(element: HTMLTextAreaElement): void {
 	} else {
 		insert(element, '\t');
 	}
-	event.stopImmediatePropagation()
 }
 
 function findLineEnd(value: string, currentEnd: number): number {
@@ -105,6 +104,7 @@ export function eventHandler(event: KeyboardEvent): void {
 			indent(textarea);
 		}
 
+		event.stopImmediatePropagation()
 		event.preventDefault();
 	}
 }
