@@ -37,6 +37,7 @@ export function indent(element: HTMLTextAreaElement): void {
 	} else {
 		insert(element, '\t');
 	}
+	event.stopImmediatePropagation()
 }
 
 function findLineEnd(value: string, currentEnd: number): number {
