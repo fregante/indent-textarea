@@ -104,8 +104,8 @@ export function eventHandler(event: KeyboardEvent): void {
 			indent(textarea);
 		}
 
-		event.stopImmediatePropagation()
 		event.preventDefault();
+		event.stopImmediatePropagation()
 	}
 }
 
