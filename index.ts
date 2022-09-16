@@ -105,7 +105,7 @@ export function eventHandler(event: KeyboardEvent): void {
 		}
 
 		event.preventDefault();
-		event.stopImmediatePropagation()
+		event.stopImmediatePropagation();
 	}
 }
 
