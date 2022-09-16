@@ -91,7 +91,7 @@ export function eventHandler(event) {
 		<script type="module">
 			const status = document.querySelector('#status')
 			import('./index.js')
-				.catch(() => import('https://unpkg.com/indent-textarea@latest/index.js'))
+				.catch(() => import('https://cdn.skypack.dev/indent-textarea'))
 				.then(indentation => {
 					indentation.watch('textarea');
 					status.replaceWith(status.firstElementChild);
