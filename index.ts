@@ -86,18 +86,18 @@ export function unindent(element: HTMLTextAreaElement): void {
 }
 
 export function eventHandler(event: KeyboardEvent): void {
-	if (event.defaultPrevented) {
+	if (
+		event.defaultPrevented ||
+		event.metaKey ||
+		event.altKey ||
+		event.ctrlKey
+	) {
 		return;
 	}
 
 	const textarea = event.target as HTMLTextAreaElement;
 
-	if (
-		event.key === 'Tab' &&
-		!event.metaKey &&
-		!event.altKey &&
-		!event.ctrlKey
-	) {
+	if (event.key === 'Tab') {
 		if (event.shiftKey) {
 			unindent(textarea);
 		} else {
