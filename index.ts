@@ -106,6 +106,13 @@ export function eventHandler(event: KeyboardEvent): void {
 
 		event.preventDefault();
 		event.stopImmediatePropagation();
+	} else if (
+		event.key === 'Escape' &&
+		!event.shiftKey
+	) {
+		textarea.blur();
+
+		event.preventDefault();
 	}
 }
 
