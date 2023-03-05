@@ -18,7 +18,7 @@ This only supports <kbd>tab</kbd> and <kbd>shift+tab</kbd> but it doesn't preser
 
 ## Install
 
-You can download the [standalone bundle](https://bundle.fregante.com/?pkg=indent-textarea&global=indentation)
+You can download the [standalone bundle](https://bundle.fregante.com/?pkg=indent-textarea&global=window)
 
 Or use `npm`:
 
@@ -28,7 +28,7 @@ npm install indent-textarea
 
 ```js
 // This module is only offered as a ES Module
-import * as indentation from 'indent-textarea';
+import {enableTabToIndent} from 'indent-textarea';
 ```
 
 ## Usage
@@ -37,23 +37,23 @@ You can listen to <kbd>tab</kbd> and <kbd>shift+tab</kbd> to indent and unindent
 
 ```js
 const textarea = document.querySelector('textarea');
-indentation.watch(textarea);
+enableTabToIndent(textarea);
 ```
 
 If you prefer [event delegation](https://github.com/fregante/delegate-it):
 
 ```js
 import delegate from 'delegate-it';
-import {eventHandler} from 'indent-textarea';
+import {tabToIndentListener} from 'indent-textarea';
 
-delegate(document.body, 'textarea', 'keydown', eventHandler);
+delegate(document.body, 'textarea', 'keydown', tabToIndentListener);
 ```
 
-If you prefer the raw `indent`/`unindent` methods, they're also available below.
+If you prefer the raw `indentField`/`unindentField` methods, they're also available below.
 
 ## API
 
-### indentation.watch(textarea, signal)
+### enableTabToIndent(textarea, signal)
 
 Adds <kbd>tab</kbd> and <kbd>shift+tab</kbd> event listeners to the provided `textarea`(s). It also listens to <kbd>esc</kbd> to blur/unfocus the field and allow the user to keep tabbing.
 
@@ -69,18 +69,18 @@ This can be:
 
 #### signal
 
-This is an `AbortSignal` that allows you to remove the listener (or "unwatch")
+This is an `AbortSignal` that allows you to remove/disable the listener
 
 ```js
 const controller = new AbortController();
 const textarea = document.querySelector('textarea');
-indentation.watch(textarea, controller.signal);
+enableTabToIndent(textarea, controller.signal);
 
 // And then later, to stop listening
 controller.abort();
 ```
 
-### indentation.indent(textarea)
+### indentField(textarea)
 
 Raw method to indent the selected text in the provided `<textarea>` element, once, instantly.
 
@@ -88,7 +88,7 @@ Raw method to indent the selected text in the provided `<textarea>` element, onc
 
 Type: `HTMLTextAreaElement`
 
-### indentation.unindent(textarea)
+### unindentField(textarea)
 
 Raw method to unindent the selected text in the provided `<textarea>` element, once, instantly.
 
@@ -96,23 +96,23 @@ Raw method to unindent the selected text in the provided `<textarea>` element, o
 
 Type: `HTMLTextAreaElement`
 
-### indentation.eventHandler
+### tabToIndentListener
 
 Type: `(event: KeyboardEvent) => void`
 
-Raw event handler used by `indentation.watch` or to use manually via `addEventListener`
+Raw event handler used by `enableTabToIndent` or to use manually via `addEventListener`
 
 ```js
-document.querySelector('textarea').addEventListener('keydown', eventHandler);
+document.querySelector('textarea').addEventListener('keydown', tabToIndentListener);
 ```
 
 Or with [event delegation](https://github.com/fregante/delegate-it):
 
 ```js
 import delegate from 'delegate-it';
-import {eventHandler} from 'indent-textarea';
+import {tabToIndentListener} from 'indent-textarea';
 
-delegate(document.body, 'textarea', 'keydown', eventHandler);
+delegate(document.body, 'textarea', 'keydown', tabToIndentListener);
 ```
 
 # Related
