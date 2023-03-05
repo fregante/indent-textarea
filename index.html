@@ -108,13 +108,9 @@ export function eventHandler(event) {
 		</textarea>
 		<script type="module">
 			const status = document.querySelector('#status')
-			try {
-				const {enableTabToIndent} = await import('./index.ts');
-				enableTabToIndent('textarea');
-				status.replaceWith(status.firstElementChild);
-			} catch {
-				status.classList.add('bd-error')
-			}
+			import {enableTabToIndent} from './index.ts';
+			enableTabToIndent('textarea');
+			status.replaceWith(status.firstElementChild);
 		</script>
 	</main>
 </body>

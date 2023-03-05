@@ -28,8 +28,8 @@
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
-		"demo:watch": "vite",
 		"demo:build": "vite build",
+		"demo:watch": "vite preview & vite build --watch # vite serve isn't real",
 		"watch": "tsc --watch"
 	},
 	"xo": {
@@ -49,6 +49,7 @@
 		"tape-run": "^10.0.0",
 		"typescript": "^4.9.5",
 		"vite": "^4.1.4",
+		"vite-plugin-singlefile": "^0.13.3",
 		"xo": "^0.53.1"
 	}
 }

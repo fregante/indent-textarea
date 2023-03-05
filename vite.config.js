@@ -1,6 +1,10 @@
-// eslint-disable-next-line import/no-anonymous-default-export -- Config
-export default {
+import {defineConfig} from 'vite';
+import {viteSingleFile} from 'vite-plugin-singlefile';
+
+export default defineConfig({
+	base: '',
 	build: {
 		target: 'esnext',
 	},
-};
+	plugins: [viteSingleFile()],
+});
