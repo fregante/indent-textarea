@@ -121,7 +121,10 @@ type WatchableElements =
 	| HTMLTextAreaElement
 	| Iterable<HTMLTextAreaElement>;
 
-export function watch(elements: WatchableElements): void {
+export function watch(
+	elements: WatchableElements,
+	signal?: AbortSignal,
+): void {
 	if (typeof elements === 'string') {
 		elements = document.querySelectorAll(elements);
 	} else if (elements instanceof HTMLTextAreaElement) {
@@ -129,7 +132,7 @@ export function watch(elements: WatchableElements): void {
 	}
 
 	for (const element of elements) {
-		element.addEventListener('keydown', eventHandler);
+		element.addEventListener('keydown', eventHandler, {signal});
 	}
 }
 

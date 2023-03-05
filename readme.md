@@ -53,7 +53,7 @@ If you prefer the raw `indent`/`unindent` methods, they're also available below.
 
 ## API
 
-### indentation.watch(textarea)
+### indentation.watch(textarea, signal)
 
 Adds <kbd>tab</kbd> and <kbd>shift+tab</kbd> event listeners to the provided `textarea`(s). It also listens to <kbd>esc</kbd> to blur/unfocus the field and allow the user to keep tabbing.
 
@@ -66,6 +66,19 @@ This can be:
 - the `<textarea>` DOM element
 - an array/iterable of DOM elements
 - or a selector that will be used via `document.querySelectorAll` (it will watch all the selected elements)
+
+#### signal
+
+This is an `AbortSignal` that allows you to remove the listener (or "unwatch")
+
+```js
+const controller = new AbortController();
+const textarea = document.querySelector('textarea');
+indentation.watch(textarea, controller.signal);
+
+// And then later, to stop listening
+controller.abort();
+```
 
 ### indentation.indent(textarea)
 
