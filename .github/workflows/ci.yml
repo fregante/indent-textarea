@@ -8,21 +8,21 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - run: npm install
       - run: npm run test:lint
 
   Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - run: npm install
       - run: npm run build
 
   Chrome:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - run: npm install
       - run: npm run build
       - run: sudo apt-get install xvfb
@@ -31,7 +31,7 @@ jobs:
   Firefox:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - run: npm install
       - run: npm run build
       - run: sudo apt-get install xvfb

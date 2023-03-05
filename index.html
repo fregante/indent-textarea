@@ -59,6 +59,28 @@
 		#status.bd-error::before {
 			content: 'Loading failed';
 		}
+
+		textarea {
+			--line-height: 1.5em;
+			line-height: var(--line-height);
+			background: repeating-linear-gradient(
+				#00000006,
+				#00000006 var(--line-height),
+				#0000 var(--line-height),
+				#0000 calc(2 * var(--line-height))
+			);
+			background-attachment: local;
+			background-origin: content-box;
+			font-family:
+				ui-monospace,
+				"Cascadia Mono",
+				"Segoe UI Mono",
+				"Ubuntu Monospace",
+				"Source Code Pro",
+				"Fira Mono",
+				"Droid Sans Mono",
+				monospace;
+		}
 	</style>
 </head>
 <body>
