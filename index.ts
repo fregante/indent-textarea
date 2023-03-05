@@ -24,7 +24,7 @@ export function indent(element: HTMLTextAreaElement): void {
 		const newSelection = element.value.slice(firstLineStart, selectionEnd - 1);
 		const indentedText = newSelection.replace(
 			/^|\n/g, // Match all line starts
-			'$&\t'
+			'$&\t',
 		);
 		const replacementsCount = indentedText.length - newSelection.length;
 
@@ -63,7 +63,7 @@ export function unindent(element: HTMLTextAreaElement): void {
 	const newSelection = element.value.slice(firstLineStart, minimumSelectionEnd);
 	const indentedText = newSelection.replace(
 		/(^|\n)(\t| {1,2})/g,
-		'$1'
+		'$1',
 	);
 	const replacementsCount = newSelection.length - indentedText.length;
 
@@ -74,23 +74,23 @@ export function unindent(element: HTMLTextAreaElement): void {
 	// Restore selection position, including the indentation
 	const firstLineIndentation = /\t| {1,2}/.exec(value.slice(firstLineStart, selectionStart));
 
-	const difference = firstLineIndentation ?
-		firstLineIndentation[0]!.length :
-		0;
+	const difference = firstLineIndentation
+		? firstLineIndentation[0]!.length
+		: 0;
 
 	const newSelectionStart = selectionStart - difference;
 	element.setSelectionRange(
 		selectionStart - difference,
-		Math.max(newSelectionStart, selectionEnd - replacementsCount)
+		Math.max(newSelectionStart, selectionEnd - replacementsCount),
 	);
 }
 
 export function eventHandler(event: KeyboardEvent): void {
 	if (
-		event.defaultPrevented ||
-		event.metaKey ||
-		event.altKey ||
-		event.ctrlKey
+		event.defaultPrevented
+		|| event.metaKey
+		|| event.altKey
+		|| event.ctrlKey
 	) {
 		return;
 	}
@@ -107,8 +107,8 @@ export function eventHandler(event: KeyboardEvent): void {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 	} else if (
-		event.key === 'Escape' &&
-		!event.shiftKey
+		event.key === 'Escape'
+		&& !event.shiftKey
 	) {
 		textarea.blur();
 		event.preventDefault();
@@ -132,3 +132,12 @@ export function watch(elements: WatchableElements): void {
 		element.addEventListener('keydown', eventHandler);
 	}
 }
+
+const indentTextarea = {
+	indent,
+	unindent,
+	eventHandler,
+	watch,
+};
+
+export default indentTextarea;

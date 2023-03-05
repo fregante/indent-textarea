@@ -16,10 +16,10 @@ export function getState({value, selectionStart, selectionEnd}) {
 	}
 
 	return (
-		value.slice(0, selectionStart) +
-		'{' +
-		value.slice(selectionStart, selectionEnd) +
-		'}' +
-		value.slice(selectionEnd)
+		value.slice(0, selectionStart)
+		+ '{'
+		+ value.slice(selectionStart, selectionEnd)
+		+ '}'
+		+ value.slice(selectionEnd)
 	);
 }

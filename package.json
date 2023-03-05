@@ -10,10 +10,13 @@
 		"text area"
 	],
 	"repository": "fregante/indent-textarea",
+	"funding": "https://github.com/sponsors/fregante",
 	"license": "MIT",
 	"author": "Federico Brigante <me@fregante.com> (https://fregante.com)",
 	"type": "module",
-	"module": "index.js",
+	"exports": "./index.js",
+	"main": "./index.js",
+	"types": "./index.d.ts",
 	"files": [
 		"index.js",
 		"index.d.ts"
@@ -25,7 +28,7 @@
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
-		"start": "snowpack dev",
+		"start": "vite",
 		"watch": "tsc --watch"
 	},
 	"xo": {
@@ -34,17 +37,17 @@
 		]
 	},
 	"dependencies": {
-		"text-field-edit": "^3.1.0"
+		"text-field-edit": "^3.2.0"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.9.0",
+		"@sindresorhus/tsconfig": "^3.0.1",
 		"browserify": "^17.0.0",
 		"esmify": "^2.1.1",
 		"npm-run-all": "^4.1.5",
-		"snowpack": "^3.0.13",
-		"tape": "^5.2.2",
-		"tape-run": "^8.0.0",
-		"typescript": "^4.2.3",
-		"xo": "^0.38.2"
+		"tape": "^5.6.3",
+		"tape-run": "^10.0.0",
+		"typescript": "^4.9.5",
+		"vite": "^4.1.4",
+		"xo": "^0.53.1"
 	}
 }
