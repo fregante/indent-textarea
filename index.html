@@ -83,8 +83,8 @@
 	<h1><a href="https://github.com/fregante/indent-textarea">fregante/indent-textarea</a></h1>
 	<main class="container">
 		<div id="status" class="card is-paddingless">
-			<pre><code>import * as indentation from '<a href="https://github.com/fregante/indent-textarea">indent-textarea</a>';
-indentation.watch('textarea');</code></pre>
+			<pre><code>import {enableTabToIndent} from '<a href="https://github.com/fregante/indent-textarea">indent-textarea</a>';
+enableTabToIndent('textarea');</code></pre>
 		</div>
 		<p>Press <kbd>tab</kbd> or <kbd>shift+tab</kbd> to test it on real code:</p>
 		<textarea rows="19">
@@ -109,8 +109,8 @@ export function eventHandler(event) {
 		<script type="module">
 			const status = document.querySelector('#status')
 			try {
-				const indentation = await import('./index.ts');
-				indentation.watch('textarea');
+				const {enableTabToIndent} = await import('./index.ts');
+				enableTabToIndent('textarea');
 				status.replaceWith(status.firstElementChild);
 			} catch {
 				status.classList.add('bd-error')
