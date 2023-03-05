@@ -111,8 +111,8 @@ export function eventHandler(event: KeyboardEvent): void {
 		!event.shiftKey
 	) {
 		textarea.blur();
-
 		event.preventDefault();
+		event.stopImmediatePropagation();
 	}
 }
 
