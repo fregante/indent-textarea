@@ -87,7 +87,7 @@
 indentation.watch('textarea');</code></pre>
 		</div>
 		<p>Press <kbd>tab</kbd> or <kbd>shift+tab</kbd> to test it on real code:</p>
-	<textarea rows="19">
+		<textarea rows="19">
 export function eventHandler(event) {
 	if (event.defaultPrevented) {
 		return;
@@ -105,17 +105,16 @@ export function eventHandler(event) {
 		event.preventDefault();
 	}
 }
-	</textarea>
+		</textarea>
 		<script type="module">
 			const status = document.querySelector('#status')
-			import('./index.js')
-				.catch(() => import('https://cdn.skypack.dev/indent-textarea'))
-				.then(indentation => {
-					indentation.watch('textarea');
-					status.replaceWith(status.firstElementChild);
-				}).catch(() => {
-					status.classList.add('bd-error')
-				});
+			try {
+				const indentation = await import('./index.ts');
+				indentation.watch('textarea');
+				status.replaceWith(status.firstElementChild);
+			} catch {
+				status.classList.add('bd-error')
+			}
 		</script>
 	</main>
 </body>

@@ -3,3 +3,4 @@ index.js
 index.d.ts
 *.map
 !tests/*
+dist

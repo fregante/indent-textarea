@@ -28,7 +28,8 @@
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",
-		"start": "vite",
+		"demo:watch": "vite",
+		"demo:build": "vite build",
 		"watch": "tsc --watch"
 	},
 	"xo": {
