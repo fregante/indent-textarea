@@ -49,7 +49,7 @@ import {tabToIndentListener} from 'indent-textarea';
 delegate(document.body, 'textarea', 'keydown', tabToIndentListener);
 ```
 
-If you prefer the raw `indentField`/`unindentField` methods, they're also available below.
+If you prefer the raw `indentSelection`/`unindentSelection` methods, they're also available below.
 
 ## API
 
@@ -80,7 +80,7 @@ enableTabToIndent(textarea, controller.signal);
 controller.abort();
 ```
 
-### indentField(textarea)
+### indentSelection(textarea)
 
 Raw method to indent the selected text in the provided `<textarea>` element, once, instantly.
 
@@ -88,7 +88,7 @@ Raw method to indent the selected text in the provided `<textarea>` element, onc
 
 Type: `HTMLTextAreaElement`
 
-### unindentField(textarea)
+### unindentSelection(textarea)
 
 Raw method to unindent the selected text in the provided `<textarea>` element, once, instantly.
 

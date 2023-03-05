@@ -10,7 +10,7 @@ The unindent selection expansion logic is a bit convoluted and I wish a genius w
 
 */
 
-export function indentField(element: HTMLTextAreaElement): void {
+export function indentSelection(element: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = element;
 	const selectedText = value.slice(selectionStart, selectionEnd);
 	// The first line should be indented, even if it starts with `\n`
@@ -53,7 +53,7 @@ function findLineEnd(value: string, currentEnd: number): number {
 
 // The first line should always be unindented
 // The last line should only be unindented if the selection includes any characters after `\n`
-export function unindentField(element: HTMLTextAreaElement): void {
+export function unindentSelection(element: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = element;
 
 	// Select the whole first line because it might contain \t
@@ -99,9 +99,9 @@ export function tabToIndentListener(event: KeyboardEvent): void {
 
 	if (event.key === 'Tab') {
 		if (event.shiftKey) {
-			unindentField(textarea);
+			unindentSelection(textarea);
 		} else {
-			indentField(textarea);
+			indentSelection(textarea);
 		}
 
 		event.preventDefault();
@@ -136,10 +136,10 @@ export function enableTabToIndent(
 	}
 }
 
-/** @deprecated Renamed to indentField */
-export const indent = indentField;
-/** @deprecated Renamed to unindentField */
-export const unindent = unindentField;
+/** @deprecated Renamed to indentSelection */
+export const indent = indentSelection;
+/** @deprecated Renamed to unindentSelection */
+export const unindent = unindentSelection;
 /** @deprecated Renamed to tabToIndentListener */
 export const eventHandler = tabToIndentListener;
 /** @deprecated Renamed to enableTabToIndent */
