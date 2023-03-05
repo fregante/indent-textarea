@@ -6,11 +6,11 @@ import {insert} from 'text-field-edit';
 
 Indent and unindent affect characters outside the selection, so the selection has to be expanded (`newSelection`) before applying the replacement regex.
 
-The `unindent` selection expansion logic is a bit convoluted and I wish a genius would rewrite it more efficiently.
+The unindent selection expansion logic is a bit convoluted and I wish a genius would rewrite it more efficiently.
 
 */
 
-export function indent(element: HTMLTextAreaElement): void {
+export function indentField(element: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = element;
 	const selectedText = value.slice(selectionStart, selectionEnd);
 	// The first line should be indented, even if it starts with `\n`
@@ -53,7 +53,7 @@ function findLineEnd(value: string, currentEnd: number): number {
 
 // The first line should always be unindented
 // The last line should only be unindented if the selection includes any characters after `\n`
-export function unindent(element: HTMLTextAreaElement): void {
+export function unindentField(element: HTMLTextAreaElement): void {
 	const {selectionStart, selectionEnd, value} = element;
 
 	// Select the whole first line because it might contain \t
@@ -85,7 +85,7 @@ export function unindent(element: HTMLTextAreaElement): void {
 	);
 }
 
-export function eventHandler(event: KeyboardEvent): void {
+export function tabToIndentListener(event: KeyboardEvent): void {
 	if (
 		event.defaultPrevented
 		|| event.metaKey
@@ -99,9 +99,9 @@ export function eventHandler(event: KeyboardEvent): void {
 
 	if (event.key === 'Tab') {
 		if (event.shiftKey) {
-			unindent(textarea);
+			unindentField(textarea);
 		} else {
-			indent(textarea);
+			indentField(textarea);
 		}
 
 		event.preventDefault();
@@ -121,7 +121,7 @@ type WatchableElements =
 	| HTMLTextAreaElement
 	| Iterable<HTMLTextAreaElement>;
 
-export function watch(
+export function enableTabToIndent(
 	elements: WatchableElements,
 	signal?: AbortSignal,
 ): void {
@@ -132,15 +132,6 @@ export function watch(
 	}
 
 	for (const element of elements) {
-		element.addEventListener('keydown', eventHandler, {signal});
+		element.addEventListener('keydown', tabToIndentListener, {signal});
 	}
 }
-
-const indentTextarea = {
-	indent,
-	unindent,
-	eventHandler,
-	watch,
-};
-
-export default indentTextarea;

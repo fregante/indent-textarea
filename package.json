@@ -24,7 +24,7 @@
 	"scripts": {
 		"build": "tsc",
 		"prepack": "tsc --sourceMap false",
-		"test": "run-s build test:*",
+		"test": "run-s build test:* demo:build",
 		"test:blink": "browserify -p esmify tests/* | tape-run --browser chrome",
 		"test:gecko": "browserify -p esmify tests/* | tape-run --browser firefox",
 		"test:lint": "xo",

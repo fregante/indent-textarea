@@ -1,5 +1,5 @@
 env:
-  IMPORT_TEXT: import {indent} from
+  IMPORT_TEXT: import {enableTabToIndent} from
   NPM_MODULE_NAME: indent-textarea
 
 # FILE GENERATED WITH: npx ghat fregante/ghatemplates/esm-lint
