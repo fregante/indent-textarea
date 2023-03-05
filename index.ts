@@ -125,3 +125,12 @@ export function watch(elements: WatchableElements): void {
 		element.addEventListener('keydown', eventHandler);
 	}
 }
+
+const indentTextarea = {
+	indent,
+	unindent,
+	eventHandler,
+	watch,
+};
+
+export default indentTextarea;
