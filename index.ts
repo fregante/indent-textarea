@@ -135,3 +135,12 @@ export function enableTabToIndent(
 		element.addEventListener('keydown', tabToIndentListener, {signal});
 	}
 }
+
+/** @deprecated Renamed to indentField */
+export const indent = indentField;
+/** @deprecated Renamed to unindentField */
+export const unindent = unindentField;
+/** @deprecated Renamed to tabToIndentListener */
+export const eventHandler = tabToIndentListener;
+/** @deprecated Renamed to enableTabToIndent */
+export const watch = enableTabToIndent;
