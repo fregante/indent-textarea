@@ -55,7 +55,7 @@ If you prefer the raw `indent`/`unindent` methods, they're also available below.
 
 ### indentation.watch(textarea)
 
-Adds <kbd>tab</kbd> and <kbd>shift+tab</kbd> event listeners to the provided `textarea`(s).
+Adds <kbd>tab</kbd> and <kbd>shift+tab</kbd> event listeners to the provided `textarea`(s). It also listens to <kbd>esc</kbd> to blur/unfocus the field and allow the user to keep tabbing.
 
 #### textarea
 
