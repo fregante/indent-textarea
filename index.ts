@@ -87,10 +87,10 @@ export function unindent(element: HTMLTextAreaElement): void {
 
 export function eventHandler(event: KeyboardEvent): void {
 	if (
-		event.defaultPrevented ||
-		event.metaKey ||
-		event.altKey ||
-		event.ctrlKey
+		event.defaultPrevented
+		|| event.metaKey
+		|| event.altKey
+		|| event.ctrlKey
 	) {
 		return;
 	}
@@ -107,8 +107,8 @@ export function eventHandler(event: KeyboardEvent): void {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 	} else if (
-		event.key === 'Escape' &&
-		!event.shiftKey
+		event.key === 'Escape'
+		&& !event.shiftKey
 	) {
 		textarea.blur();
 		event.preventDefault();
