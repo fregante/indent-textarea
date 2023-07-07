@@ -121,3 +121,7 @@ delegate(document.body, 'textarea', 'keydown', tabToIndentListener);
 - [fit-textarea](https://github.com/fregante/fit-textarea) - Automatically expand a `<textarea>` to fit its content, in a few bytes.
 - [delegate-it](https://github.com/fregante/delegate-it) - DOM event delegation, in <1KB. Can be used to attach one `indent-textarea` to many elements.
 - [Refined GitHub](https://github.com/sindresorhus/refined-github) - Uses this module.
+
+## License
+
+MIT © [Federico Brigante](https://fregante.com)
