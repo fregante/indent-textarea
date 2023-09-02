@@ -3,7 +3,7 @@ export function getField(state = '') {
 	const cursor = state.indexOf('|');
 	const selectionStart = state.indexOf('{');
 	const selectionEnd = state.indexOf('}') - 1;
-	field.value = state.replace(/[{|}]/g, '');
+	field.value = state.replaceAll(/[{|}]/g, '');
 	field.selectionStart = cursor >= 0 ? cursor : selectionStart;
 	field.selectionEnd = cursor >= 0 ? cursor : selectionEnd;
 	document.body.append(field);

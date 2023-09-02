@@ -22,7 +22,7 @@ export function indentSelection(element: HTMLTextAreaElement): void {
 		const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
 
 		const newSelection = element.value.slice(firstLineStart, selectionEnd - 1);
-		const indentedText = newSelection.replace(
+		const indentedText = newSelection.replaceAll(
 			/^|\n/g, // Match all line starts
 			'$&\t',
 		);
@@ -61,7 +61,7 @@ export function unindentSelection(element: HTMLTextAreaElement): void {
 	const minimumSelectionEnd = findLineEnd(value, selectionEnd);
 
 	const newSelection = element.value.slice(firstLineStart, minimumSelectionEnd);
-	const indentedText = newSelection.replace(
+	const indentedText = newSelection.replaceAll(
 		/(^|\n)(\t| {1,2})/g,
 		'$1',
 	);
