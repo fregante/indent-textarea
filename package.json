@@ -38,18 +38,21 @@
 		]
 	},
 	"dependencies": {
-		"text-field-edit": "^3.2.0"
+		"text-field-edit": "^4.0.0"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^3.0.1",
+		"@sindresorhus/tsconfig": "^4.0.0",
 		"browserify": "^17.0.0",
 		"esmify": "^2.1.1",
 		"npm-run-all": "^4.1.5",
-		"tape": "^5.6.4",
+		"tape": "^5.6.6",
 		"tape-run": "^10.0.0",
-		"typescript": "^5.1.6",
-		"vite": "^4.4.2",
+		"typescript": "^5.2.2",
+		"vite": "^4.4.9",
 		"vite-plugin-singlefile": "^0.13.5",
-		"xo": "^0.54.2"
+		"xo": "^0.56.0"
+	},
+	"engines": {
+		"node": ">=18"
 	}
 }

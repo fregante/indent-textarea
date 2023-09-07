@@ -1,4 +1,4 @@
-import {insert} from 'text-field-edit';
+import {insertTextIntoField} from 'text-field-edit';
 
 /*
 
@@ -22,7 +22,7 @@ export function indentSelection(element: HTMLTextAreaElement): void {
 		const firstLineStart = value.lastIndexOf('\n', selectionStart - 1) + 1;
 
 		const newSelection = element.value.slice(firstLineStart, selectionEnd - 1);
-		const indentedText = newSelection.replace(
+		const indentedText = newSelection.replaceAll(
 			/^|\n/g, // Match all line starts
 			'$&\t',
 		);
@@ -30,12 +30,12 @@ export function indentSelection(element: HTMLTextAreaElement): void {
 
 		// Replace newSelection with indentedText
 		element.setSelectionRange(firstLineStart, selectionEnd - 1);
-		insert(element, indentedText);
+		insertTextIntoField(element, indentedText);
 
 		// Restore selection position, including the indentation
 		element.setSelectionRange(selectionStart + 1, selectionEnd + replacementsCount);
 	} else {
-		insert(element, '\t');
+		insertTextIntoField(element, '\t');
 	}
 }
 
@@ -61,7 +61,7 @@ export function unindentSelection(element: HTMLTextAreaElement): void {
 	const minimumSelectionEnd = findLineEnd(value, selectionEnd);
 
 	const newSelection = element.value.slice(firstLineStart, minimumSelectionEnd);
-	const indentedText = newSelection.replace(
+	const indentedText = newSelection.replaceAll(
 		/(^|\n)(\t| {1,2})/g,
 		'$1',
 	);
@@ -69,7 +69,7 @@ export function unindentSelection(element: HTMLTextAreaElement): void {
 
 	// Replace newSelection with indentedText
 	element.setSelectionRange(firstLineStart, minimumSelectionEnd);
-	insert(element, indentedText);
+	insertTextIntoField(element, indentedText);
 
 	// Restore selection position, including the indentation
 	const firstLineIndentation = /\t| {1,2}/.exec(value.slice(firstLineStart, selectionStart));
