@@ -38,7 +38,7 @@
 		]
 	},
 	"dependencies": {
-		"text-field-edit": "^3.2.0"
+		"text-field-edit": "^4.0.0"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^4.0.0",
